@@ -1,4 +1,7 @@
 buttons:
+  - title: Deploy Workflows to Camunda Cloud
+    action: "deploy_workflows"
+    description: Deploy the demo workflows to your Camunda Cloud Zeebe cluster
   - title: Run Get Time Demo
     action: "get_time"
     description: Run the "Get Time" demo workflow
