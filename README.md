@@ -1,5 +1,7 @@
 # Camunda Cloud Starter
 
+[![Actions Panel](https://img.shields.io/badge/actionspanel-enabled-brightgreen)](https://www.actionspanel.app/app/jwulf/camunda-cloud-starter)
+
 Getting Started with Camunda Cloud using GitHub.
 
 1. Get a [Camunda Cloud](https://camunda.io) Account.
