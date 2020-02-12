@@ -1,0 +1,26 @@
+name: Deploy Workflows
+
+on: [repository_dispatch]
+
+jobs:
+  deploy-workflows:
+    if: github.event.action == 'deploy-workflows'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy Demo Workflow "Get Time"
+        uses: jwulf/zeebe-action@master
+        with:
+          zeebe_address: ${{ secrets.ZEEBE_ADDRESS }}
+          zeebe_client_id: ${{ secrets.ZEEBE_CLIENT_ID }}
+          zeebe_authorization_server_url: ${{ secrets.ZEEBE_AUTHORIZATION_SERVER_URL }}
+          zeebe_client_secret: ${{ secrets.ZEEBE_CLIENT_SECRET }}
+          operation: deployWorkflow
+          bpmn_filename: bpmn/demo-get-time.bpmn
+      # - name: Execute Demo Workflow "Get Time"
+      #   uses: jwulf/zeebe-action@master
+      #   with:
+      #     operation: createWorkflowInstanceWithResult
+      #     bpmn_process_id: demo-get-time
