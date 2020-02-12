@@ -25,3 +25,5 @@ Getting Started with Camunda Cloud using GitHub.
 7. Go back to [https://www.actionspanel.app/](https://www.actionspanel.app/)
 
 8. You now have buttons to run the various demo workflows in this starter.
+
+![](img/buttons.png)

@@ -1,14 +1,15 @@
-name: Deploy Workflows
+name: Run Get Time Demo
 
-on: [push]
+on: [repository_dispatch]
 
 jobs:
   demo-get-time:
+    if: github.event.action == 'get_color'
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-      - name: Deploy Demo Workflow "Get Time"
+      - name: Deploy Demo Workflow "Get Color"
         uses: jwulf/zeebe-action@master
         with:
           zeebe_address: ${{ secrets.ZEEBE_ADDRESS }}
@@ -16,9 +17,16 @@ jobs:
           zeebe_authorization_server_url: ${{ secrets.ZEEBE_AUTHORIZATION_SERVER_URL }}
           zeebe_client_secret: ${{ secrets.ZEEBE_CLIENT_SECRET }}
           operation: deployWorkflow
-          bpmn_directory: bpmn
-      - name: Execute Demo Workflow "Get Time"
+          bpmn_filename: bpmn/demo-get-color.bpmn
+      - name: Generate Random Number
+        id: random
+        uses: jwulf/random-number
+      - name: Execute Demo Workflow "Get Color"
+        id: color
         uses: jwulf/zeebe-action@master
         with:
           operation: createWorkflowInstanceWithResult
           bpmn_process_id: demo-get-time
+          variables: '{"id": ${{steps.random.output.number}}}'
+      - name: Print Output
+        run: echo "The random color is ${{ steps.color.output.result.data.name }}"
