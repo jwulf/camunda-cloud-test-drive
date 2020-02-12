@@ -1,4 +1,4 @@
-name: CI
+name: Run Get Time Demo
 
 on: [repository_dispatch]
 
