@@ -59,6 +59,10 @@ When you hit "Add Secret", you should see this:
 
 ![](img/deployed-operate.png)
 
+The GitHub Action that deploys the workflows to Camunda Cloud is in [.github/workflows/deploy-workflows.yml](/.github/workflows/deploy-workflows.yml).
+
+Under the hood, the Zeebe GitHub Action uses the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node#deploy-a-workflow) to do this (see the code [here](https://github.com/jwulf/zeebe-action/blob/master/src/main.ts#L88)). 
+
 ## Run the Get Time demo
 
 The Get Time demo model is [bpmn/demo-get-time.bpmn](bpmn/demo-get-time.bpmn).

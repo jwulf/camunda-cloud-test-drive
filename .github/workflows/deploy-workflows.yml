@@ -16,8 +16,3 @@ jobs:
           client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: deployWorkflow
           bpmn_directory: bpmn
-      # - name: Execute Demo Workflow "Get Time"
-      #   uses: jwulf/zeebe-action@master
-      #   with:
-      #     operation: createWorkflowInstanceWithResult
-      #     bpmn_process_id: demo-get-time
