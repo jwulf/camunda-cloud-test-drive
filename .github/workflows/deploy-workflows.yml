@@ -4,7 +4,7 @@ on: [repository_dispatch]
 
 jobs:
   deploy-workflows:
-    if: github.event.action == 'deploy-workflows'
+    if: github.event.action == 'deploy_workflows'
 
     runs-on: ubuntu-latest
 

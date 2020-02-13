@@ -4,26 +4,41 @@
 
 Getting Started with Camunda Cloud using GitHub.
 
-1. Get a [Camunda Cloud](https://camunda.io) Account.
-2. Create a new client in the Camunda Cloud console.
+## Setup
+
+* Fork this repo to your own account.
+* Get a [Camunda Cloud](https://camunda.io) Account.
+* Create a new client in the Camunda Cloud console.
+* Click the button to copy the entire client configuration
+
 ![](img/client-config.png)
 
-3. Fork this repo to your own account.
-
-4. Add the client configuration to your fork as secrets ([instructions](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets)):
+* Create a new secret in your repository's Settings > Secrets ([instructions](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets)). Call it `ZEEBE_CLIENT_CONFIG`, and paste in the client config:
 
 ![](img/secrets.png)
 
-5. Go to [https://www.actionspanel.app/](https://www.actionspanel.app/) and sign in with GitHub.
+* Go to [https://www.actionspanel.app/](https://www.actionspanel.app/) and sign in with GitHub.
 
-6. Install the Actions Panel app to your forked repo.
+* Install the Actions Panel app to your forked repo.
 
 ![](img/actionspanel.png)
 
 ![](img/actionspanel-install.png)
 
-7. Go back to [https://www.actionspanel.app/](https://www.actionspanel.app/)
+* Go back to [https://www.actionspanel.app/](https://www.actionspanel.app/)
 
-8. You now have buttons to run the various demo workflows in this starter.
+* You now have buttons to run the various demo workflows in this starter.
 
 ![](img/buttons.png)
+
+## Run the demos
+
+* Open the "Actions" view in your repo in one browser tab.
+
+![](img/actions.png)
+
+* Open [https://www.actionspanel.app/](https://www.actionspanel.app/) in another.
+
+* Click on "Run this action" to "Deploy the demo workflows to your Camunda Cloud Zeebe cluster".
+
+* After you click it, refresh the Actions view in the repo.
