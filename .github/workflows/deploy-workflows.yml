@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Deploy Demo Workflow "Get Time"
+      - name: Deploy Demo Workflows
         uses: jwulf/zeebe-action@master
         with:
           zeebe_address: ${{ secrets.ZEEBE_ADDRESS }}
@@ -18,7 +18,7 @@ jobs:
           zeebe_authorization_server_url: ${{ secrets.ZEEBE_AUTHORIZATION_SERVER_URL }}
           zeebe_client_secret: ${{ secrets.ZEEBE_CLIENT_SECRET }}
           operation: deployWorkflow
-          bpmn_filename: bpmn/demo-get-time.bpmn
+          bpmn_directory: bpmn
       # - name: Execute Demo Workflow "Get Time"
       #   uses: jwulf/zeebe-action@master
       #   with:
