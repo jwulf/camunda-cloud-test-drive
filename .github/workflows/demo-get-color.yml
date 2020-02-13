@@ -23,7 +23,7 @@ jobs:
         uses: jwulf/zeebe-action@master
         with:
           operation: createWorkflowInstanceWithResult
-          bpmn_process_id: demo-get-time
+          bpmn_process_id: demo-get-color
           variables: '{"id": ${{steps.random.outputs.number}} }'
       - name: Print Output
         run: echo "The random color is ${{ steps.color.outputs.result.data.name }}"
