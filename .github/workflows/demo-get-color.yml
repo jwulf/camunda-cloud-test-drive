@@ -1,9 +1,9 @@
-name: Run Get Time Demo
+name: Run Get Color Demo
 
 on: [repository_dispatch]
 
 jobs:
-  demo-get-time:
+  demo-get-color:
     if: github.event.action == 'get_color'
     runs-on: ubuntu-latest
 
@@ -27,6 +27,6 @@ jobs:
         with:
           operation: createWorkflowInstanceWithResult
           bpmn_process_id: demo-get-time
-          variables: '{"id": ${{steps.random.output.number}}}'
+          variables: '{"id": ${{steps.random.output.number}} }'
       - name: Print Output
-        run: echo "The random color is ${{ steps.color.output.result.data.name }}"
+        run: echo "The random color is ${{ steps.color.outputs.result.data.name }}"
