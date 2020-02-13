@@ -3,7 +3,7 @@ name: Deploy Workflows
 on: [push]
 
 jobs:
-  demo-get-time:
+  deploy-workflows:
     runs-on: ubuntu-latest
 
     steps:
