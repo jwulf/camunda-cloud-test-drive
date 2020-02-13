@@ -2,7 +2,7 @@
 
 [![Actions Panel](https://img.shields.io/badge/actionspanel-enabled-brightgreen)](https://www.actionspanel.app/app/jwulf/camunda-cloud-starter)
 
-Getting Started with Camunda Cloud using no code or installation of software, using GitHub and the [Zeebe GitHub Action](https://github.com/marketplace/actions/zeebe-action).
+Getting Started with Camunda Cloud with no code or installation of software, using GitHub and the [Zeebe GitHub Action](https://github.com/marketplace/actions/zeebe-action).
 
 ## Setup
 
