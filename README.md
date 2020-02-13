@@ -31,7 +31,7 @@ Getting Started with Camunda Cloud using GitHub.
 
 ![](img/buttons.png)
 
-## Deploy the demo workflow
+## Deploy the demo workflows
 
 * Open the "Actions" view in your repo in one browser tab.
 
