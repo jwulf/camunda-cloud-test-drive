@@ -2,7 +2,7 @@
 
 [![Actions Panel](https://img.shields.io/badge/actionspanel-enabled-brightgreen)](https://www.actionspanel.app/app/jwulf/camunda-cloud-starter)
 
-Getting Started with Camunda Cloud using nothing but GitHub and the [Zeebe GitHub Action](https://github.com/marketplace/actions/zeebe-action).
+Getting Started with Camunda Cloud using no code or installation of software, using GitHub and the [Zeebe GitHub Action](https://github.com/marketplace/actions/zeebe-action).
 
 ## Setup
 
@@ -17,7 +17,11 @@ Getting Started with Camunda Cloud using nothing but GitHub and the [Zeebe GitHu
 
 ![](img/secrets.png)
 
-* Go to [https://www.actionspanel.app/](https://www.actionspanel.app/) and sign in with GitHub.
+When you hit "Add Secret", you should see this:
+
+![](img/secret-done.png)
+
+* Now, we will add an app to this repo that lets you trigger GitHub Actions for a web-based UI. Go to [Actions Panel](https://www.actionspanel.app/) and sign in with your GitHub account.
 
 * Install the Actions Panel app to your forked repo.
 
@@ -25,7 +29,7 @@ Getting Started with Camunda Cloud using nothing but GitHub and the [Zeebe GitHu
 
 ![](img/actionspanel-install.png)
 
-* Go back to [https://www.actionspanel.app/](https://www.actionspanel.app/)
+* Go back to [Actions Panel](https://www.actionspanel.app/)
 
 * You now have buttons to run the various demo workflows in this starter.
 
@@ -37,7 +41,7 @@ Getting Started with Camunda Cloud using nothing but GitHub and the [Zeebe GitHu
 
 ![](img/actions.png)
 
-* Open [https://www.actionspanel.app/](https://www.actionspanel.app/) in another browser window.
+* Open [Actions Panel](https://www.actionspanel.app/) in another browser window.
 
 * In the Action panel, click on "Run this action" for "_Deploy the demo workflows to your Camunda Cloud Zeebe cluster_". This will deploy the workflows to your cluster.
 
@@ -67,7 +71,9 @@ It has a single task in it. The task is serviced by the Camunda Cloud HTTP Worke
 
 Let's create an instance of this workflow.
 
-* In your [Action Panel](https://www.actionspanel.app/)), click on "Run this action" for "_Run the "Get Time" demo workflow_".
+* In your [Actions Panel](https://www.actionspanel.app/), click on "Run this action" for "_Run the "Get Time" demo workflow_".
+
+![](img/click-to-run-get-time.png)
 
 * In the Actions view of your repo, you will see the "Run Get Time Demo" running. The code for this is in [.github/workflows/demo-get-time.yml].
 
