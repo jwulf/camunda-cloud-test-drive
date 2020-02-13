@@ -20,7 +20,7 @@ jobs:
           bpmn_filename: bpmn/demo-get-color.bpmn
       - name: Generate Random Number
         id: random
-        uses: jwulf/random-number
+        uses: jwulf/random-number@master
       - name: Execute Demo Workflow "Get Color"
         id: color
         uses: jwulf/zeebe-action@master
