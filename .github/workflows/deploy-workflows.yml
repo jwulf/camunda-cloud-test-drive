@@ -13,10 +13,7 @@ jobs:
       - name: Deploy Demo Workflows
         uses: jwulf/zeebe-action@master
         with:
-          zeebe_address: ${{ secrets.ZEEBE_ADDRESS }}
-          zeebe_client_id: ${{ secrets.ZEEBE_CLIENT_ID }}
-          zeebe_authorization_server_url: ${{ secrets.ZEEBE_AUTHORIZATION_SERVER_URL }}
-          zeebe_client_secret: ${{ secrets.ZEEBE_CLIENT_SECRET }}
+          client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: deployWorkflow
           bpmn_directory: bpmn
       # - name: Execute Demo Workflow "Get Time"
