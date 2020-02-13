@@ -17,7 +17,7 @@ Getting Started with Camunda Cloud with no code or installation of software, usi
 
 ![](img/secrets.png)
 
-When you hit "Add Secret", you should see this:
+When you hit "Add secret", you should see this:
 
 ![](img/secret-done.png)
 
