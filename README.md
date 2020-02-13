@@ -41,6 +41,8 @@ Getting Started with Camunda Cloud using GitHub.
 
 * In the Action panel, click on "Run this action" for "_Deploy the demo workflows to your Camunda Cloud Zeebe cluster_". This will deploy the workflows to your cluster.
 
+![](img/click-to-deploy.png)
+
 * After you click the button, refresh the Actions view in the other browser window. You will see the "Deploy Workflows" job running.
 
 ![](img/deploying.png)
