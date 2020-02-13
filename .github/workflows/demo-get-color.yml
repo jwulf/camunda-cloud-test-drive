@@ -26,4 +26,4 @@ jobs:
           bpmn_process_id: demo-get-color
           variables: '{"id": ${{steps.random.outputs.number}} }'
       - name: Print Output
-        run: echo "The random color is ${{ steps.color.outputs.result.data.name }}"
+        run: echo "The random color is ${{ steps.color.outputs.result.variables.body.data.name }}"
