@@ -43,7 +43,7 @@ When you hit "Add secret", you should see this:
 
 * Open [Actions Panel](https://www.actionspanel.app/) in another browser window.
 
-* In the Action panel, click on "Run this action" for "_Deploy the demo workflows to your Camunda Cloud Zeebe cluster_". This will deploy the workflows to your cluster.
+* In Actions Panel, click on "Run this action" for "_Deploy the demo workflows to your Camunda Cloud Zeebe cluster_". This will deploy the workflows to your cluster.
 
 ![](img/click-to-deploy.png)
 
