@@ -13,7 +13,7 @@ Getting Started with Camunda Cloud using nothing but GitHub and the [Zeebe GitHu
 
 ![](img/client-config.png)
 
-* Create a new secret in your repository's Settings > Secrets ([instructions](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets)). Call it `ZEEBE_CLIENT_CONFIG`, and paste in the client config:
+* Create a new secret in your forked repository's Settings > Secrets ([instructions](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets)). Call it `ZEEBE_CLIENT_CONFIG`, and paste in the client config:
 
 ![](img/secrets.png)
 
