@@ -24,6 +24,6 @@ jobs:
         with:
           operation: createWorkflowInstanceWithResult
           bpmn_process_id: demo-get-time
-          variables: '{"id": ${{steps.random.output.number}} }'
+          variables: '{"id": ${{steps.random.outputs.number}} }'
       - name: Print Output
         run: echo "The random color is ${{ steps.color.outputs.result.data.name }}"
