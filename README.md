@@ -21,7 +21,7 @@ When you hit "Add secret", you should see this:
 
 ![](img/secret-done.png)
 
-* Now, we will add an app to this repo that lets you trigger GitHub Actions for a web-based UI. Go to [Actions Panel](https://www.actionspanel.app/) and sign in with your GitHub account.
+* Now, we will add an app to this repo that lets you trigger GitHub Actions from a web-based UI. Go to [Actions Panel](https://www.actionspanel.app/) and sign in with your GitHub account.
 
 * Install the Actions Panel app to your forked repo.
 
