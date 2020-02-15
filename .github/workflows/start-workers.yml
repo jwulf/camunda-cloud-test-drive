@@ -1,9 +1,9 @@
-name: Deploy Workflows
+name: Start Workers
 
 on: [repository_dispatch]
 
 jobs:
-  deploy-workflows:
+  start-workers:
     if: github.event.action == 'start_workers'
     runs-on: ubuntu-latest
 
