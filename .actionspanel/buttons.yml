@@ -8,3 +8,6 @@ buttons:
   - title: Run Get Color Demo
     action: "get_color"
     description: Run the "Get Color" demo workflow
+  - title: Start Workers
+    action: "start_workers"
+    description: Start Zeebe Workers
