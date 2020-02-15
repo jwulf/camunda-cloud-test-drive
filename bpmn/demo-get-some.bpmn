@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0by3gne" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Zeebe Modeler" exporterVersion="0.8.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0by3gne" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Zeebe Modeler" exporterVersion="0.8.0">
   <bpmn:process id="get-some" name="get-some" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1" name="Start">
       <bpmn:outgoing>SequenceFlow_0qki3f7</bpmn:outgoing>
@@ -10,6 +10,9 @@
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0dl58dz" sourceRef="Task_0sol5k1" targetRef="EndEvent_13sbmwo" />
     <bpmn:serviceTask id="Task_0sol5k1" name="Get Some">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="get-some" />
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0qki3f7</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0dl58dz</bpmn:outgoing>
     </bpmn:serviceTask>
