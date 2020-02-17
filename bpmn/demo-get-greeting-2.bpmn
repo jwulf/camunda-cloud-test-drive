@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0imt8sg" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Zeebe Modeler" exporterVersion="0.8.0">
+  <bpmn:process id="demo-get-greeting-2" name="demo-get-greeting-2" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Start">
+      <bpmn:outgoing>SequenceFlow_0028b9j</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0028b9j" sourceRef="StartEvent_1" targetRef="Get_JSON_time" />
+    <bpmn:endEvent id="EndEvent_0rz1yn9" name="End">
+      <bpmn:incoming>SequenceFlow_1x9za3x</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Get_JSON_time" name="Get JSON time">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="CAMUNDA-HTTP" />
+        <zeebe:taskHeaders>
+          <zeebe:header key="url" value="https://json-api.joshwulf.com/time" />
+          <zeebe:header key="get" />
+        </zeebe:taskHeaders>
+        <zeebe:ioMapping>
+          <zeebe:output source="body.hour" target="hour" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0028b9j</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_00fndbl</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_00fndbl" sourceRef="Get_JSON_time" targetRef="Get_Greeting" />
+    <bpmn:serviceTask id="Get_Greeting" name="Get Greeting">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="get-greeting" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_00fndbl</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1x9za3x</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1x9za3x" sourceRef="Get_Greeting" targetRef="EndEvent_0rz1yn9" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="demo-get-greeting-2">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="185" y="142" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0028b9j_di" bpmnElement="SequenceFlow_0028b9j">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0rz1yn9_di" bpmnElement="EndEvent_0rz1yn9">
+        <dc:Bounds x="612" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="620" y="142" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0hvs57r_di" bpmnElement="Get_JSON_time">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_00fndbl_di" bpmnElement="SequenceFlow_00fndbl">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0qqgu6j_di" bpmnElement="Get_Greeting">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1x9za3x_di" bpmnElement="SequenceFlow_1x9za3x">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="612" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

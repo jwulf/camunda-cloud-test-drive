@@ -11,6 +11,9 @@ buttons:
   - title: Run Get Greeting Demo
     action: "get_greeting"
     description: Run the "Get Greeting" demo workflow
+  - title: Run Get Greeting 2 Demo
+    action: "get_greeting_2"
+    description: Run the "Get Greeting No. 2" demo workflow
   - title: Start Workers
     action: "start_workers"
     description: Start Zeebe Workers

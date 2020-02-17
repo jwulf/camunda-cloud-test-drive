@@ -73,7 +73,11 @@ If you open the model in the [Zeebe Modeler](https://github.com/zeebe-io/zeebe-m
 
 ![](img/get-time-model.png)
 
-It has a single task in it. The task is serviced by the Camunda Cloud HTTP Worker. It does a GET request to the [Camunda Cloud Demo JSON API](https://github.com/jwulf/camunda-cloud-demo-json-api) to get the current time as a JSON object.
+It has a single task in it. The task is serviced by the [Camunda Cloud HTTP Worker](https://github.com/zeebe-io/zeebe-http-worker). This is a task worker hosted in Camunda Cloud that services tasks of type `CAMUNDA-HTTP` and can make REST calls based on the task configuration, adding the JSON payload of the response to the workflow variables.
+
+To use it, you set the task type to `CAMUNDA-HTTP` and set two headers on the task that have particular semantics for this worker: `url` - what it says; and `method` the HTTP method. The task in this demo workflow has the url set to [https://json-api.joshwulf.com/time](https://json-api.joshwulf.com/time) and the `method` set to "get".
+
+In this workflow, it does a GET request to the [Camunda Cloud Demo JSON API](https://github.com/jwulf/camunda-cloud-demo-json-api) to get the current time as a JSON object.
 
 Let's create an instance of this workflow.
 
@@ -187,4 +191,69 @@ However, at this point, we're reaching the limits of what we can do without writ
 So let's do this again with a Zeebe Worker serving a task to generate the greeting based on the time that is passed to it.
 
 ## Writing a Zeebe Worker 
+
+A Zeebe Worker is a process that connects to Camunda Cloud over gRPC and polls for available work for a particular task type, using the [`activateJobs`](https://docs.zeebe.io/reference/grpc.html?highlight=activateJobs#activatejobs-rpc) command. It uses [long-polling to reduce load](https://zeebe.io/blog/2019/08/long-polling/).
+
+When the Zeebe broker in Camunda Cloud has a job for the worker's task type, it streams the job to the worker. The worker then does what it does, and returns the completed job to the broker. It can also fail the job (basically the equivalent of throwing an exception), or throw a business error (BPMN Error event). 
+
+In this demo, however, we will only consider the happy path.
+
+The model for this demo is in [bpmn/demo-get-greeting-2.bpmn](bpmn/get-greeting-2.bpmn). In the Zeebe Modeler it looks like this: 
+
+![](img/get-greeting-2-model.png)
+
+The first task uses the Camunda HTTP Worker (a hosted instance of the [Zeebe HTTP Worker](https://github.com/zeebe-io/zeebe-http-worker)) to call the demo JSON time API. It has a task type of `CAMUNDA-HTTP`.
+
+The second task has a task type of `get-greeting`:
+
+![](img/get-greeting-task-type.png)
+
+There is no worker listening for this task type in your cluster, so we need to start one.
+
+The file [workers/greeting.js](workers/greeting.js) contains a Worker handler function for a Node.js worker. 
+
+You can write Zeebe workers in any of [a number of popular programming languages](https://docs.zeebe.io/clients/index.html). The [Zeebe GitHub Action](https://github.com/marketplace/actions/zeebe-action) that we are using for these demos just happens to be written in JavaScript using the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node).
+
+The worker job handler is a simple callback function that takes a `job` and a `complete` function.
+
+```javascript
+module.exports = {
+  tasks: {
+    "get-greeting": (job, complete) => {
+      core.info("===Worker===")
+      core.info(`Got a job from Camunda Cloud:`);
+      core.info(JSON.stringify(job, null, 2));
+      core.info("===Worker===")
+      const { hour } = job.variables;
+      let greeting;
+      if (hour > 5 && hour < 12) {
+        greeting = "Good morning!";
+      } else if (hour >= 12 && hour < 20) {
+        greeting = "Good afternoon";
+      } else {
+        greeting = "Good night!";
+      }
+      complete.success({ greeting });
+    }
+  }
+};
+```
+
+It also contains the code to create and await a workflow instance, print the outcome, and exit:
+
+```javascript
+zbc.createWorkflowInstanceWithResult("get-greeting-2", {})
+.then(res => {
+  core.info("===Outcome to Requestor===")
+  core.info(res);
+  core.info("===Outcome to Requestor===")
+  setTimeout(() => zbc.close().then(() => process.exit(0)), 500);
+});
+```
+
+Let's run the demo and see it at work!
+
+* Go to [Actions Panel](https://www.actionspanel.app/) and click the button to _Run the "Get Greeting No. 2" demo workflow_.
+
+* In your repo's Actions view you will see something like this:
 
