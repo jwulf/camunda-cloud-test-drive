@@ -145,6 +145,10 @@ Here is the model, which you can find in [bpmn/demo-get-greeting.bpmn](bpmn/demo
 
 This workflow will get the time from the JSON API, then branch based on the current hour, and add a time-appropriate greeting string to the worker variables.
 
+The last branch has no condition because it is the _default flow_. Every conditional must have one (see [here](https://forum.zeebe.io/t/bpmn-exclusive-or-gateway-workflow-using-zeebe-java-client/997/6) for why that is). If no other condition matches, it will take this flow.
+
+Let's run the demo!
+
 * Go to [Actions Panel](https://www.actionspanel.app/) and click the _Run the "Get Greeting" demo workflow_ button.
 
 In your repo's Actions you will see the "Run Get Greeting" workflow run, and you'll see output similar to the following, depending on the time of day that you run this (note that the API returns the GMT time):
@@ -242,7 +246,7 @@ module.exports = {
 It also contains the code to create and await a workflow instance, print the outcome, and exit:
 
 ```javascript
-zbc.createWorkflowInstanceWithResult("get-greeting-2", {})
+zbc.createWorkflowInstanceWithResult("demo-get-greeting-2", {})
 .then(res => {
   core.info("===Outcome to Requestor===")
   core.info(res);

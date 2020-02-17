@@ -1,4 +1,4 @@
-zbc.createWorkflowInstanceWithResult("get-greeting-2", {}).then(res => {
+zbc.createWorkflowInstanceWithResult("demo-get-greeting-2", {}).then(res => {
   core.info("===Outcome to Requestor===");
   core.info(res);
   core.info("===Outcome to Requestor===");

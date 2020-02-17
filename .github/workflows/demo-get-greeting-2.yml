@@ -14,7 +14,7 @@ jobs:
         with:
           client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: deployWorkflow
-          bpmn_filename: bpmn/demo-get-greeting.bpmn
+          bpmn_filename: bpmn/demo-get-greeting-2.bpmn
       - name: Execute Demo Workflow "Get Greeting 2"
         uses: jwulf/zeebe-action@master
         with:
