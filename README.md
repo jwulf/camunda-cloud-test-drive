@@ -113,7 +113,7 @@ Here is what that looks like in the [Zeebe Modeler](https://github.com/zeebe-io/
 
 ![](img/get-time-output-mapping.png)
 
-And in the model XML: 
+And in [the model XML](bpmn/demo-get-time-2.bpmn): 
 
 ```XML
 <zeebe:ioMapping>
