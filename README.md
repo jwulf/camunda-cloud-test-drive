@@ -1,4 +1,4 @@
-# Camunda Cloud Starter
+# Zero-installation Getting Started with Camunda Cloud 
 
 [![Actions Panel](https://img.shields.io/badge/actionspanel-enabled-brightgreen)](https://www.actionspanel.app/app/jwulf/camunda-cloud-starter)
 
