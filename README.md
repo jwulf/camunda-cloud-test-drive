@@ -85,7 +85,7 @@ Let's create an instance of this workflow. We will be running [.github/workflows
 
 ![](img/click-to-run-get-time.png)
 
-* In the Actions view of your repo, you will see the "Run Get Time Demo" running. The code for this is in [.github/workflows/demo-get-time.yml](./.github/workflows/demo-get-time.yml).
+* In the Actions view of your repo, you will see the "Run Get Time Demo" running. 
 
 ![](img/run-get-time.png)
 
@@ -123,6 +123,8 @@ And in the model XML:
 
 ## Let's run the demo!
 
+The GitHub workflow that runs this demo is in [.github/workflows/demo-get-time-2.yml](./.github/workflows/demo-get-time-2.yml).
+
 * In [Actions Panel](https://www.actionspanel.app/) click the _Run the "Get Time No. 2" demo workflow_ button.
 
 The "Run Get Time Demo 2" workflow will run in your repo's Actions.
@@ -148,6 +150,8 @@ This workflow will get the time from the JSON API, then branch based on the curr
 The last branch has no condition because it is the _default flow_. Every conditional must have one (see [here](https://forum.zeebe.io/t/bpmn-exclusive-or-gateway-workflow-using-zeebe-java-client/997/6) for why that is). If no other condition matches, it will take this flow.
 
 Let's run the demo!
+
+The GitHub workflow that runs this demo is in [.github/workflows/demo-get-greeting.yml](./.github/workflows/demo-get-greeting.yml).
 
 * Go to [Actions Panel](https://www.actionspanel.app/) and click the _Run the "Get Greeting" demo workflow_ button.
 
