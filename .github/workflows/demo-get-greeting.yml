@@ -1,0 +1,23 @@
+name: Run Get Greeting
+
+on: [repository_dispatch]
+
+jobs:
+  demo-get-greeting:
+    if: github.event.action == 'get_greeting'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy Demo Workflow "Get Greeting"
+        uses: jwulf/zeebe-action@master
+        with:
+          client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
+          operation: deployWorkflow
+          bpmn_filename: bpmn/demo-get-greeting.bpmn
+      - name: Execute Demo Workflow "Get Greeting"
+        uses: jwulf/zeebe-action@master
+        with:
+          operation: createWorkflowInstanceWithResult
+          bpmn_process_id: demo-get-greeting
+          variables: '{"greeting":{"morning":"Good morning!","afternoon":"Good afternoon!","night":"Good night!"}}'

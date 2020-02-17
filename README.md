@@ -61,7 +61,9 @@ When you hit "Add secret", you should see this:
 
 The GitHub Action that deploys the workflows to Camunda Cloud is in [.github/workflows/deploy-workflows.yml](/.github/workflows/deploy-workflows.yml).
 
-Under the hood, the Zeebe GitHub Action uses the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node#deploy-a-workflow) to do this (see the code [here](https://github.com/jwulf/zeebe-action/blob/master/src/main.ts#L88)). 
+Under the hood, the Zeebe GitHub Action uses the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node#deploy-a-workflow) to do this (see the Zeebe Action code that does it [here](https://github.com/jwulf/zeebe-action/blob/master/src/main.ts#L88)). 
+
+Note that libraries are available to program [Zeebe clients in a number of popular programming languages](https://docs.zeebe.io/clients/index.html).
 
 ## Run the Get Time demo
 
@@ -103,7 +105,7 @@ If you have a workflow that makes a number of REST calls, you don't want subsequ
 
 You can accomplish this by creating variable mappings on your tasks. In the next demo [bpmn/demo-get-time-2.bpmn](bpmn/demo-get-time-2.bpmn), we create a mapping on the "Get JSON time" task to map the `body` variable to a new `time_from_api` variable.
 
-Here is what that looks like in the Zeebe Modeler: 
+Here is what that looks like in the [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler): 
 
 ![](img/get-time-output-mapping.png)
 
@@ -115,7 +117,7 @@ And in the model XML:
 </zeebe:ioMapping>
 ```
 
-Let's run the demo!
+## Let's run the demo!
 
 * In [Actions Panel](https://www.actionspanel.app/) click the _Run the "Get Time No. 2" demo workflow_ button.
 
@@ -127,5 +129,15 @@ This time you will see output similar to the following:
 
 The value of the response from the JSON API has been mapped to the variable `time_from_api` in the workflow variables. 
 
-Note also that the status code, which was present in the first demo as the `status` variable, is gone. Once you map one variable on the output, you need to map _all_ the variables that you want. So it acts to both map and constrain the variables that are added to the workflow variables.
+Note that the status code, which was present in the first demo as the `status` variable, is gone. Once you map one variable on the output, you need to map _all_ the variables that you want. So it acts to both map _and_ constrain the variables that are added to the workflow variables. Handy.
+
+## Make a Decision
+
+In the next demo, we will use a model that makes a decision based on the current time from the JSON API.
+
+Here is the model, which you can find in [bpmn/demo-get-greeting.bpmn](bpmn/demo-get-greeting.bpmn):
+
+![](img/demo-get-greeting-model.png)
+
+This workflow will get the time from the JSON API, then branch based on the current hour.
 

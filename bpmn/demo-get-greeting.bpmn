@@ -48,6 +48,9 @@
           <zeebe:header key="url" value="https://json-api.joshwulf.com/time" />
           <zeebe:header key="method" value="get" />
         </zeebe:taskHeaders>
+        <zeebe:ioMapping>
+          <zeebe:output source="greeting.afternoon" target="greeting" />
+        </zeebe:ioMapping>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0e6dvke</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0g7rsuw</bpmn:outgoing>
@@ -58,6 +61,9 @@
           <zeebe:header key="url" value="https://json-api.joshwulf.com/time" />
           <zeebe:header key="method" value="get" />
         </zeebe:taskHeaders>
+        <zeebe:ioMapping>
+          <zeebe:output source="greeting.morning" target="greeting" />
+        </zeebe:ioMapping>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0jcl75x</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0rwlyml</bpmn:outgoing>
@@ -68,6 +74,9 @@
           <zeebe:header key="url" value="https://json-api.joshwulf.com/time" />
           <zeebe:header key="method" value="get" />
         </zeebe:taskHeaders>
+        <zeebe:ioMapping>
+          <zeebe:output source="greeting.night" target="greeting" />
+        </zeebe:ioMapping>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1i4codw</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1f48cx4</bpmn:outgoing>

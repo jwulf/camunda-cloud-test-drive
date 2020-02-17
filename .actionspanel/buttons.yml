@@ -8,9 +8,9 @@ buttons:
   - title: Run Get Time Demo 2
     action: "get_time_2"
     description: Run the "Get Time No. 2" demo workflow
-  - title: Run Get Color Demo
-    action: "get_color"
-    description: Run the "Get Color" demo workflow
+  - title: Run Get Greeting Demo
+    action: "get_greeting"
+    description: Run the "Get Greeting" demo workflow
   - title: Start Workers
     action: "start_workers"
     description: Start Zeebe Workers
