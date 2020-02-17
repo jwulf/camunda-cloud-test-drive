@@ -261,3 +261,46 @@ Let's run the demo and see it at work!
 
 * In your repo's Actions view you will see something like this:
 
+```
+===Worker===
+Got a job from Camunda Cloud:
+{
+  "key": "2251799813826172",
+  "type": "get-greeting",
+  "workflowInstanceKey": "2251799813826160",
+  "bpmnProcessId": "demo-get-greeting-2",
+  "workflowDefinitionVersion": 1,
+  "workflowKey": "2251799813826096",
+  "elementId": "Get_Greeting",
+  "elementInstanceKey": "2251799813826171",
+  "customHeaders": {},
+  "worker": "e139975d-31b9-4feb-bc11-03ceaba161f6",
+  "retries": 3,
+  "deadline": "1581934619467",
+  "variables": {
+    "hour": 10
+  }
+}
+===Worker===
+===Outcome to Requestor===
+{
+  "workflowKey": "2251799813826096",
+  "bpmnProcessId": "demo-get-greeting-2",
+  "version": 1,
+  "workflowInstanceKey": "2251799813826160",
+  "variables": {
+    "hour": 10,
+    "greeting": "Good morning!"
+  }
+}
+```
+
+Here you can see the `job` object that the worker receives from Camunda Cloud. The UUID for `worker` is the auto-generated id for this worker. The Zeebe broker knows that the job has been streamed to this worker, and keeps track of how long it has had it. If the worker doesn't complete the job within a [specified period of time](https://www.npmjs.com/package/zeebe-node#create-a-task-worker), the broker will time it out and give the job to another worker.
+
+Our worker, however, did its job, calculated the correct greeting based on the time in the job variables, and sent back the appropriate greeting.
+
+## Next Steps
+
+OK, that's a basic getting started with Camunda Cloud. Maybe you are ready to start writing your own workers locally - in which case you can find a client library in [your favorite programming language](https://docs.zeebe.io/clients/index.html) and get started now.
+
+Or, you might like to look at a more advanced use-case in this repo - an [ecommerce order flow that demonstrates correlating messages with a running workflow instance](ADVANCED.md).
