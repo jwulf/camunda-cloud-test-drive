@@ -1,6 +1,6 @@
 zbc.createWorkflowInstanceWithResult("demo-get-greeting-2", {}).then(res => {
   core.info("===Outcome to Requestor===");
-  core.info(res);
+  core.info(JSON.stringify(res, null, 2));
   core.info("===Outcome to Requestor===");
   setTimeout(() => zbc.close().then(() => process.exit(0)), 500);
 });

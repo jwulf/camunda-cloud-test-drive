@@ -248,9 +248,9 @@ It also contains the code to create and await a workflow instance, print the out
 ```javascript
 zbc.createWorkflowInstanceWithResult("demo-get-greeting-2", {})
 .then(res => {
-  core.info("===Outcome to Requestor===")
-  core.info(res);
-  core.info("===Outcome to Requestor===")
+  core.info("===Outcome to Requestor===");
+  core.info(JSON.stringify(res, null, 2));
+  core.info("===Outcome to Requestor===");
   setTimeout(() => zbc.close().then(() => process.exit(0)), 500);
 });
 ```

@@ -3,7 +3,7 @@ name: Run Get Greeting 2
 on: [repository_dispatch]
 
 jobs:
-  demo-get-greeting:
+  demo-get-greeting-2:
     if: github.event.action == 'get_greeting_2'
     runs-on: ubuntu-latest
 
@@ -20,3 +20,4 @@ jobs:
         with:
           operation: startWorkers
           worker_handler_file: workers/greeting.js
+          worker_lifetime_mins: 2
