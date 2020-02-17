@@ -6,6 +6,12 @@ We will use [GhettoHub DB](https://github.com/jwulf/ghettohub-db) for database p
 
 ## Configure Camunda Cloud to access this repo
 
+In this section you will create a GitHub Token that will allow the Camunda HTTP Worker to post `repository_dispatch` events to this repository. 
+
+The token will not be available to any code that runs in response to these events, it is used only to authorize the POST request that triggers Actions. Nor will it be visible in any logs, including Operate. We will be using variable substitution to make it available to the Camunda HTTP Worker from secret Worker Variables in your Camunda Cloud account.
+
 * Create a new GitHub Personal Access Token, following [these instructions](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line).
 
-_Editor's Note_: To not require a GitHub Token (which can access all of the user's repos), we could create a GhettoHub GitHub Application that can be added to just this repo.
+* Create a new Worker variable in your Camunda Cloud cluster, named `GitHubToken`. Paste the GitHub token in there.
+
+All workflows and commands will use `{{GitHubToken}}` to refer to this token, and only the Camunda HTTP Worker running in Camunda Cloud will have access to its actual value at runtime.
