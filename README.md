@@ -59,7 +59,7 @@ When you hit "Add secret", you should see this:
 
 ![](img/deployed-operate.png)
 
-The GitHub Action that deploys the workflows to Camunda Cloud is in [.github/workflows/deploy-workflows.yml](/.github/workflows/deploy-workflows.yml).
+The GitHub Action that deploys the workflows to Camunda Cloud is in [.github/workflows/deploy-workflows.yml](./.github/workflows/deploy-workflows.yml).
 
 Under the hood, the Zeebe GitHub Action uses the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node#deploy-a-workflow) to do this (see the Zeebe Action code that does it [here](https://github.com/jwulf/zeebe-action/blob/master/src/main.ts#L88)). 
 
@@ -85,7 +85,7 @@ Let's create an instance of this workflow. We will be running [.github/workflows
 
 ![](img/click-to-run-get-time.png)
 
-* In the Actions view of your repo, you will see the "Run Get Time Demo" running. The code for this is in [.github/workflows/demo-get-time.yml].
+* In the Actions view of your repo, you will see the "Run Get Time Demo" running. The code for this is in [.github/workflows/demo-get-time.yml](./.github/workflows/demo-get-time.yml).
 
 ![](img/run-get-time.png)
 
@@ -173,7 +173,7 @@ For example:
 
 Where did that `greeting.morning` variable come from? 
 
-_We pass it into the workflow as a dictionary when we start the workflow_. Take a look at [.github/workflows/demo-get-greeting.yml](.github/workflows/demo-get-greeting.yml). Here's the relevant section:
+_We pass it into the workflow as a dictionary when we start the workflow_. Take a look at [.github/workflows/demo-get-greeting.yml](./.github/workflows/demo-get-greeting.yml). Here's the relevant section:
 
 ```
 - name: Execute Demo Workflow "Get Greeting"
