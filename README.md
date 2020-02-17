@@ -216,7 +216,7 @@ The second task has a task type of `get-greeting`:
 
 ![](img/get-greeting-task-type.png)
 
-There is no worker listening for this task type in your cluster, so we need to start one.
+There is no worker listening for the `get-greeting` task type in your cluster, so we need to start one.
 
 The file [workers/greeting.js](workers/greeting.js) contains a Worker handler function for a Node.js worker. 
 
