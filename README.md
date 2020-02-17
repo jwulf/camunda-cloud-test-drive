@@ -293,6 +293,7 @@ Got a job from Camunda Cloud:
     "greeting": "Good morning!"
   }
 }
+===Outcome to Requestor===
 ```
 
 Here you can see the `job` object that the worker receives from Camunda Cloud. The UUID for `worker` is the auto-generated id for this worker. The Zeebe broker knows that the job has been streamed to this worker, and keeps track of how long it has had it. If the worker doesn't complete the job within a [specified period of time](https://www.npmjs.com/package/zeebe-node#create-a-task-worker), the broker will time it out and give the job to another worker.
