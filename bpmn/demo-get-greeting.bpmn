@@ -29,19 +29,19 @@
       <bpmn:outgoing>SequenceFlow_1i4codw</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_0cbr49m" sourceRef="Get_JSON_time" targetRef="ExclusiveGateway_1qx5o5u" />
-    <bpmn:sequenceFlow id="SequenceFlow_0e6dvke" name="hour &#62;=12 &#38;&#38; hour &#60; 20" sourceRef="ExclusiveGateway_1qx5o5u" targetRef="Task_1h4tc5z">
+    <bpmn:sequenceFlow id="SequenceFlow_0e6dvke" name="hour &#62;=12 &#38;&#38; hour &#60; 20" sourceRef="ExclusiveGateway_1qx5o5u" targetRef="Good_afternoon_task">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">hour &gt;=12 &amp;&amp; hour &lt; 20</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_0jcl75x" name="hour &#62; 5 &#38;&#38; hour &#60; 12" sourceRef="ExclusiveGateway_1qx5o5u" targetRef="Task_0mwcrgr">
+    <bpmn:sequenceFlow id="SequenceFlow_0jcl75x" name="hour &#62; 5 &#38;&#38; hour &#60; 12" sourceRef="ExclusiveGateway_1qx5o5u" targetRef="Good_morning_task">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">hour &gt; 5 &amp;&amp; hour &lt; 12</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_0g7rsuw" sourceRef="Task_1h4tc5z" targetRef="EndEvent_0rz1yn9" />
+    <bpmn:sequenceFlow id="SequenceFlow_0g7rsuw" sourceRef="Good_afternoon_task" targetRef="EndEvent_0rz1yn9" />
     <bpmn:endEvent id="EndEvent_067geeu" name="End">
       <bpmn:incoming>SequenceFlow_0rwlyml</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_0rwlyml" sourceRef="Task_0mwcrgr" targetRef="EndEvent_067geeu" />
-    <bpmn:sequenceFlow id="SequenceFlow_1i4codw" sourceRef="ExclusiveGateway_1qx5o5u" targetRef="Task_1d54mt3" />
-    <bpmn:serviceTask id="Task_1h4tc5z" name="Good afternoon">
+    <bpmn:sequenceFlow id="SequenceFlow_0rwlyml" sourceRef="Good_morning_task" targetRef="EndEvent_067geeu" />
+    <bpmn:sequenceFlow id="SequenceFlow_1i4codw" sourceRef="ExclusiveGateway_1qx5o5u" targetRef="Good_night_task" />
+    <bpmn:serviceTask id="Good_afternoon_task" name="Good afternoon">
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="CAMUNDA-HTTP" />
         <zeebe:taskHeaders>
@@ -55,7 +55,7 @@
       <bpmn:incoming>SequenceFlow_0e6dvke</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0g7rsuw</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_0mwcrgr" name="Good morning!">
+    <bpmn:serviceTask id="Good_morning_task" name="Good morning!">
       <bpmn:extensionElements>
         <zeebe:taskHeaders>
           <zeebe:header key="url" value="https://json-api.joshwulf.com/time" />
@@ -69,7 +69,7 @@
       <bpmn:incoming>SequenceFlow_0jcl75x</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0rwlyml</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_1d54mt3" name="Good night!">
+    <bpmn:serviceTask id="Good_night_task" name="Good night!">
       <bpmn:extensionElements>
         <zeebe:taskHeaders>
           <zeebe:header key="url" value="https://json-api.joshwulf.com/time" />
@@ -86,7 +86,7 @@
     <bpmn:endEvent id="EndEvent_1mky3x2" name="End">
       <bpmn:incoming>SequenceFlow_1f48cx4</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_1f48cx4" sourceRef="Task_1d54mt3" targetRef="EndEvent_1mky3x2" />
+    <bpmn:sequenceFlow id="SequenceFlow_1f48cx4" sourceRef="Good_night_task" targetRef="EndEvent_1mky3x2" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="demo-get-greeting">
@@ -153,13 +153,13 @@
         <di:waypoint x="450" y="340" />
         <di:waypoint x="620" y="340" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ServiceTask_1bvpx5e_di" bpmnElement="Task_1h4tc5z">
+      <bpmndi:BPMNShape id="ServiceTask_1bvpx5e_di" bpmnElement="Good_afternoon_task">
         <dc:Bounds x="620" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_030mtr0_di" bpmnElement="Task_0mwcrgr">
+      <bpmndi:BPMNShape id="ServiceTask_030mtr0_di" bpmnElement="Good_morning_task">
         <dc:Bounds x="620" y="190" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ServiceTask_1mwwr0b_di" bpmnElement="Task_1d54mt3">
+      <bpmndi:BPMNShape id="ServiceTask_1mwwr0b_di" bpmnElement="Good_night_task">
         <dc:Bounds x="620" y="300" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1mky3x2_di" bpmnElement="EndEvent_1mky3x2">

@@ -139,5 +139,52 @@ Here is the model, which you can find in [bpmn/demo-get-greeting.bpmn](bpmn/demo
 
 ![](img/demo-get-greeting-model.png)
 
-This workflow will get the time from the JSON API, then branch based on the current hour.
+This workflow will get the time from the JSON API, then branch based on the current hour, and add a time-appropriate greeting string to the worker variables.
+
+* Go to [Actions Panel](https://www.actionspanel.app/) and click the _Run the "Get Greeting" demo workflow_ button.
+
+In your repo's Actions you will see the "Run Get Greeting" workflow run, and you'll see output similar to the following, depending on the time of day that you run this (note that the API returns the GMT time):
+
+![](img/get-greeting-output.png)
+
+This time, we constrained the workflow payload to just the hour by mapping it in the output of the "Get JSON time" task:
+
+![](img/get-greeting-time-mapping.png)
+
+The decision branches then examine the value of the `hour` workflow variable to determine which branch to take, using a [condition expression](https://docs.zeebe.io/reference/conditions.html):
+
+![](img/get-greeting-condition.png)
+
+How we get the appropriate greeting into the payload is an ingenious workaround - aka a HACK - for running this workflow with no workers other than the HTTP worker.
+
+Each of the tasks after the branch makes another call to the JSON time endpoint, which is thrown away. On the output of each task, however, we map a variable to the `greeting` variable of the workflow.
+
+For example:
+
+![](img/good-morning-task.png)
+
+Where did that `greeting.morning` variable come from? 
+
+_We pass it into the workflow as a dictionary when we start the workflow_. Take a look at [.github/workflows/demo-get-greeting.yml](.github/workflows/demo-get-greeting.yml). Here's the relevant section:
+
+```
+- name: Execute Demo Workflow "Get Greeting"
+  uses: jwulf/zeebe-action@master
+  with:
+    operation: createWorkflowInstanceWithResult
+    bpmn_process_id: demo-get-greeting
+    variables: '{"greeting":{"morning":"Good morning!","afternoon":"Good afternoon!","night":"Good night!"}}'
+```
+
+The output mapping overwrote the dictionary, to keep the output clean for this demo.
+
+There is work ongoing to make it possible to use string constants in task definitions (see [the feature in progress here](https://github.com/zeebe-io/zeebe/issues/3417)).
+
+In the meantime, it is possible to work around it by including a "no-op" task, and mapping from a constants dictionary that you pass into the workflow when you create it. 
+
+However, at this point, we're reaching the limits of what we can do without writing our own custom task workers. Note, also, that with this coupling it is difficult to test this without mocking the JSON endpoint to be able to change time.
+
+So let's do this again with a Zeebe Worker serving a task to generate the greeting based on the time that is passed to it.
+
+## Writing a Zeebe Worker 
 
