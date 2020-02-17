@@ -257,6 +257,8 @@ zbc.createWorkflowInstanceWithResult("demo-get-greeting-2", {})
 
 Let's run the demo and see it at work!
 
+The GitHub workflow we will be running is [.github/workflows/demo-get-greeting-2.yml](./.github/workflows/demo-get-greeting-2.yml).
+
 * Go to [Actions Panel](https://www.actionspanel.app/) and click the button to _Run the "Get Greeting No. 2" demo workflow_.
 
 * In your repo's Actions view you will see something like this:
