@@ -13,7 +13,7 @@
       <bpmn:extensionElements>
         <zeebe:taskDefinition type="CAMUNDA-HTTP" />
         <zeebe:taskHeaders>
-          <zeebe:header key="url" value="http://time.jsontest.com/" />
+          <zeebe:header key="url" value="https://json-api.joshwulf.com/time" />
           <zeebe:header key="get" />
         </zeebe:taskHeaders>
       </bpmn:extensionElements>

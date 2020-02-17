@@ -71,7 +71,7 @@ If you open the model in the [Zeebe Modeler](https://github.com/zeebe-io/zeebe-m
 
 ![](img/get-time-model.png)
 
-It has a single task in it. The task is serviced by the Camunda Cloud HTTP Worker. It does a GET request to [http://time.jsontest.com/](http://time.jsontest.com/) to get the current time as a JSON object.
+It has a single task in it. The task is serviced by the Camunda Cloud HTTP Worker. It does a GET request to the [Camunda Cloud Demo JSON API](https://github.com/jwulf/camunda-cloud-demo-json-api) to get the current time as a JSON object.
 
 Let's create an instance of this workflow.
 
