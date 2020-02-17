@@ -79,7 +79,7 @@ To use it, you set the task type to `CAMUNDA-HTTP` and set two headers on the ta
 
 In this workflow, it does a GET request to the [Camunda Cloud Demo JSON API](https://github.com/jwulf/camunda-cloud-demo-json-api) to get the current time as a JSON object.
 
-Let's create an instance of this workflow. We will be running [.github/workflows/demo-get-time.bpmn](.github/workflows/demo-get-time.bpmn).
+Let's create an instance of this workflow. We will be running [.github/workflows/demo-get-time.bpmn](.github/workflows/demo-get-time.yaml).
 
 * In your [Actions Panel](https://www.actionspanel.app/), click on "Run this action" for "_Run the "Get Time" demo workflow_".
 
