@@ -300,6 +300,8 @@ Here you can see the `job` object that the worker receives from Camunda Cloud. T
 
 Our worker, however, did its job, calculated the correct greeting based on the time in the job variables, and sent back the appropriate greeting.
 
+The response object passed to `complete.success` by the worker was merged with the existing workflow variables.
+
 In contrast to baking it into the model, this worker function is easy to unit test, as it is decoupled from the time input.
 
 ## Next Steps
