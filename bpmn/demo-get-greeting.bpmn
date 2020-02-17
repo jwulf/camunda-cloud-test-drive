@@ -64,6 +64,7 @@
         <zeebe:ioMapping>
           <zeebe:output source="greeting.morning" target="greeting" />
         </zeebe:ioMapping>
+        <zeebe:taskDefinition type="CAMUNDA-HTTP" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0jcl75x</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0rwlyml</bpmn:outgoing>
@@ -77,6 +78,7 @@
         <zeebe:ioMapping>
           <zeebe:output source="greeting.night" target="greeting" />
         </zeebe:ioMapping>
+        <zeebe:taskDefinition type="CAMUNDA-HTTP" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1i4codw</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1f48cx4</bpmn:outgoing>
