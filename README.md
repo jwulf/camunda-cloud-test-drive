@@ -218,9 +218,9 @@ The second task has a task type of `get-greeting`:
 
 There is no worker listening for the `get-greeting` task type in your cluster, so we need to start one.
 
-The file [workers/greeting.js](workers/greeting.js) contains a Worker handler function for a Node.js worker. 
-
 You can write Zeebe workers in any of [a number of popular programming languages](https://docs.zeebe.io/clients/index.html). The [Zeebe GitHub Action](https://github.com/marketplace/actions/zeebe-action) that we are using for these demos just happens to be written in JavaScript using the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node).
+
+The file [workers/greeting.js](workers/greeting.js) contains a Worker handler function for a Node.js worker. 
 
 The worker job handler in the Node.js client is a simple callback function that takes a `job` and a `complete` function.
 
