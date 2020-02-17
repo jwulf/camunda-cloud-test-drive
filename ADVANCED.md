@@ -6,6 +6,6 @@ We will use [GhettoHub DB](https://github.com/jwulf/ghettohub-db) for database p
 
 ## Configure Camunda Cloud to access this repo
 
-* Create a new GitHub Personal Access Token.
+* Create a new GitHub Personal Access Token, following [these instructions](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line).
 
 _Editor's Note_: To not require a GitHub Token (which can access all of the user's repos), we could create a GhettoHub GitHub Application that can be added to just this repo.
