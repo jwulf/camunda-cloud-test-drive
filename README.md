@@ -300,6 +300,8 @@ Here you can see the `job` object that the worker receives from Camunda Cloud. T
 
 Our worker, however, did its job, calculated the correct greeting based on the time in the job variables, and sent back the appropriate greeting.
 
+In contrast to baking it into the model, this worker function is easy to unit test, as it is decoupled from the time input.
+
 ## Next Steps
 
 OK, that's a basic getting started with Camunda Cloud. Maybe you are ready to start writing your own workers locally - in which case you can find a client library in [your favorite programming language](https://docs.zeebe.io/clients/index.html) and get started now.
