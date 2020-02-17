@@ -5,6 +5,9 @@ buttons:
   - title: Run Get Time Demo
     action: "get_time"
     description: Run the "Get Time" demo workflow
+  - title: Run Get Time Demo 2
+    action: "get_time_2"
+    description: Run the "Get Time No. 2" demo workflow
   - title: Run Get Color Demo
     action: "get_color"
     description: Run the "Get Color" demo workflow

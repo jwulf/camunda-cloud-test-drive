@@ -83,3 +83,8 @@ Let's create an instance of this workflow.
 
 ![](img/run-get-time.png)
 
+* Click into it, and you will see the outcome of the workflow:
+
+![](img/get-time-output.png)
+
+The response

@@ -1,0 +1,22 @@
+name: Run Get Time Demo 2
+
+on: [repository_dispatch]
+
+jobs:
+  demo-get-time-2:
+    if: github.event.action == 'get_time_2'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy Demo Workflow "Get Time" No. 2
+        uses: jwulf/zeebe-action@master
+        with:
+          client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
+          operation: deployWorkflow
+          bpmn_filename: bpmn/demo-get-time-2.bpmn
+      - name: Execute Demo Workflow "Get Time" No. 2
+        uses: jwulf/zeebe-action@master
+        with:
+          operation: createWorkflowInstanceWithResult
+          bpmn_process_id: demo-get-time-2
