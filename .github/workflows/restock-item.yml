@@ -17,6 +17,7 @@ jobs:
           record: '{"product":"${{github.event.client_payload.product}}", "stock_level":"${{github.event.client_payload.stock_level}}"}'
           query: '{"product":"${{github.event.client_payload.product}}"}'
           verbose: true
+          github_token: ${{secrets.GITHUB_TOKEN}}
       - name: Publish Success Message
         uses: jwulf/zeebe-action@master
         with:
