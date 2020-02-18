@@ -23,6 +23,7 @@
             <zeebe:input source="product" target="body.client_payload.product" />
             <zeebe:input source="stock_level" target="body.client_payload.stock_level" />
             <zeebe:input source="event_type" target="body.event_type" />
+            <zeebe:input source="_id" target="body.client_payload._id" />
           </zeebe:ioMapping>
           <zeebe:taskHeaders>
             <zeebe:header key="url" value="https://api.github.com/repos/{{repo}}/dispatches" />
