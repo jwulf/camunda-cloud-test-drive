@@ -76,7 +76,7 @@ In there, we pass in initial variables to the workflow:
 {
   "repo": "{{ $github.repository }}",
   "authorization":"Bearer {{GitHubToken}}", 
-  "products":"{{ $steps.product-list.outputs.products}},
+  "products":"{{$steps.product-list.outputs.products}},
   "stock_level":"2",
   "event_type":"restock_item",
   "_id": ${{steps.date.outputs.date}},
