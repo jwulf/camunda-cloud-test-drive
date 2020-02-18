@@ -26,7 +26,9 @@ This flow uses a decoupled async pattern - rather than each microservice complet
 
 In the case of our implementation, this is because the `repository_dispatch` event sent from the `CAMUNDA-HTTP` worker to the worker in the GitHub Action is a one-way communication.
 
-This is also a pattern that you might use if your microservices are buffered by a queuing system, such as RabbitMQ, and send their responses via another queue. Later, we will reimplement this using workers that communicate directly with the broker over gRPC, so you can see what that looks like.
+This is also a pattern that you might use if your microservices are buffered by a queuing system, such as RabbitMQ, and send their responses via another queue. See [this forum post](https://forum.zeebe.io/t/how-do-i-structure-a-system-with-zeebe-and-rabbitmq/1021) and the linked articles in it for further discussion of this architectural pattern.
+
+Later, we will reimplement this using workers that communicate directly with the broker over gRPC, so you can see what that looks like.
 
 ## Dealing with Failure
 
