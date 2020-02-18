@@ -1,0 +1,32 @@
+name: Run Order Fulfilment 1
+
+on: [repository_dispatch]
+
+jobs:
+  demo-get-greeting-2:
+    if: github.event.action == 'order_fulfilment_1'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy Demo Workflow "Order Fulfilment 1"
+        uses: jwulf/zeebe-action@master
+        with:
+          client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
+          operation: deployWorkflow
+          bpmn_filename: bpmn/demo-order-fulfilment-1.bpmn
+      - name: Get Database dictionary for Workflow
+        id: database
+        uses: jwulf/ghettohub-db@master
+        with:
+          operation: INIT
+          tables: customer,stock,order,payment,shipping
+      - name: Get unique id for message correlation
+        id: date
+        run: echo "::set-output name=date::$(date)"
+      - name: Execute Demo Workflow "Order Fulfilment 1"
+        uses: jwulf/zeebe-action@master
+        with:
+          operation: createWorkflowInstanceWithResult
+          bpmn_process_id: order-fulfilment-1
+          variables: '{"_id":${{steps.date.outputs.date}},"repo":"{{ $github.repository }}","database":"{{ $steps.database.outputs.result }}","authorization":"Bearer {{GitHubToken}}"}'

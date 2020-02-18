@@ -17,3 +17,6 @@ buttons:
   - title: Start Workers
     action: "start_workers"
     description: Start Zeebe Workers
+  - title: Restock Shop
+    action: "restock_shop"
+    description: Restock the demo ecommerce store

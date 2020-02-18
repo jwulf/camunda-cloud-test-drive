@@ -1,0 +1,24 @@
+name: Restock Shop
+
+on: [repository_dispatch]
+
+jobs:
+  demo-get-greeting-2:
+    if: github.event.action == 'restock_shop'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get unique id for message correlation
+        id: date
+        run: echo "::set-output name=date::$(date)"
+      - name: Get Product List
+        id: product-list
+        uses: jwulf/camunda-cloud-demo-data-action@master
+      - name: Execute Demo Workflow "Restock Shop"
+        uses: jwulf/zeebe-action@master
+        with:
+          operation: createWorkflowInstanceWithResult
+          bpmn_process_id: populate_stock
+          request_timeout: 120
+          variables: '{"_id":${{steps.date.outputs.date}},"repo":"{{ $github.repository }}","stock_level":"2","authorization":"Bearer {{GitHubToken}}", "products":"{{ $steps.product-list.outputs.products}},"event_type":"restock_item"}'

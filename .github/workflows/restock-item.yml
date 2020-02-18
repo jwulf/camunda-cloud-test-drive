@@ -1,0 +1,24 @@
+name: Restock Item
+
+on: [repository_dispatch]
+
+jobs:
+  demo-get-greeting-2:
+    if: github.event.action == 'restock_item'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update Stock Level
+        uses: jwulf/ghettohub-db@master
+        with:
+          operation: UPSERT
+          table: stock
+          record: '{"product":"{{$github.event.client_payload.product}}", "stock_level":"{{$github.event.client_payload.stock_level}}"'
+          query: '{"product":"{{$github.event.client_payload.product}}"}'
+      - name: Publish Success Message
+        uses: jwulf/zeebe-action@master
+        with:
+          operation: publishMessage
+          message_name: RESTOCKED
+          correlationKey: ${{github.event.client_payload._id}}

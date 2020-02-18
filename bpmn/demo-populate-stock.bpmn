@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0q7a5if" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Zeebe Modeler" exporterVersion="0.8.0">
+  <bpmn:process id="populate-stock" name="populate-stock" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Populate Stock">
+      <bpmn:outgoing>SequenceFlow_0lix4ka</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:subProcess id="SubProcess_0itlkj5">
+      <bpmn:incoming>SequenceFlow_0lix4ka</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0tu07nb</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics isSequential="true">
+        <bpmn:extensionElements>
+          <zeebe:loopCharacteristics inputCollection="products" inputElement="product" />
+        </bpmn:extensionElements>
+      </bpmn:multiInstanceLoopCharacteristics>
+      <bpmn:startEvent id="StartEvent_0qjdtfl" name="Restock item">
+        <bpmn:outgoing>SequenceFlow_02ilmei</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:serviceTask id="Task_1u4uohx" name="Create Stock Record">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="CAMUNDA-HTTP" />
+          <zeebe:ioMapping>
+            <zeebe:input source="authorization" target="authorization" />
+            <zeebe:input source="product" target="body.client_payload.product" />
+            <zeebe:input source="stock_level" target="body.client_payload.stock_level" />
+            <zeebe:input source="event_type" target="body.event_type" />
+          </zeebe:ioMapping>
+          <zeebe:taskHeaders>
+            <zeebe:header key="url" value="https://api.github.com/repos/{{repo}}/dispatches" />
+            <zeebe:header key="method" value="post" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+        <bpmn:incoming>SequenceFlow_02ilmei</bpmn:incoming>
+        <bpmn:outgoing>SequenceFlow_1kpkkgx</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:sequenceFlow id="SequenceFlow_02ilmei" sourceRef="StartEvent_0qjdtfl" targetRef="Task_1u4uohx" />
+      <bpmn:sequenceFlow id="SequenceFlow_1kpkkgx" sourceRef="Task_1u4uohx" targetRef="IntermediateThrowEvent_0wpm7hi" />
+      <bpmn:endEvent id="EndEvent_0ixns27" name="Item restocked">
+        <bpmn:incoming>SequenceFlow_07wlpzn</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="SequenceFlow_07wlpzn" sourceRef="IntermediateThrowEvent_0wpm7hi" targetRef="EndEvent_0ixns27" />
+      <bpmn:intermediateCatchEvent id="IntermediateThrowEvent_0wpm7hi" name="RESTOCKED">
+        <bpmn:incoming>SequenceFlow_1kpkkgx</bpmn:incoming>
+        <bpmn:outgoing>SequenceFlow_07wlpzn</bpmn:outgoing>
+        <bpmn:messageEventDefinition messageRef="Message_1l67xlm" />
+      </bpmn:intermediateCatchEvent>
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="SequenceFlow_0lix4ka" sourceRef="StartEvent_1" targetRef="SubProcess_0itlkj5" />
+    <bpmn:endEvent id="EndEvent_1jk5orw" name="Shop restocked">
+      <bpmn:incoming>SequenceFlow_0tu07nb</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0tu07nb" sourceRef="SubProcess_0itlkj5" targetRef="EndEvent_1jk5orw" />
+  </bpmn:process>
+  <bpmn:message id="Message_1l67xlm" name="RESTOCKED">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="_id" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="populate-stock">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="160" y="205" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1jng5bi_di" bpmnElement="Task_1u4uohx">
+        <dc:Bounds x="440" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubProcess_0itlkj5_di" bpmnElement="SubProcess_0itlkj5" isExpanded="true">
+        <dc:Bounds x="300" y="80" width="520" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_0qjdtfl_di" bpmnElement="StartEvent_0qjdtfl">
+        <dc:Bounds x="340" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="326" y="205" width="64" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_02ilmei_di" bpmnElement="SequenceFlow_02ilmei">
+        <di:waypoint x="376" y="180" />
+        <di:waypoint x="440" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1kpkkgx_di" bpmnElement="SequenceFlow_1kpkkgx">
+        <di:waypoint x="540" y="180" />
+        <di:waypoint x="612" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0ixns27_di" bpmnElement="EndEvent_0ixns27">
+        <dc:Bounds x="722" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="704" y="205" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_07wlpzn_di" bpmnElement="SequenceFlow_07wlpzn">
+        <di:waypoint x="648" y="180" />
+        <di:waypoint x="722" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_0dlgxv4_di" bpmnElement="IntermediateThrowEvent_0wpm7hi">
+        <dc:Bounds x="612" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="596" y="205" width="69" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0lix4ka_di" bpmnElement="SequenceFlow_0lix4ka">
+        <di:waypoint x="215" y="180" />
+        <di:waypoint x="300" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1jk5orw_di" bpmnElement="EndEvent_1jk5orw">
+        <dc:Bounds x="912" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="892" y="205" width="77" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0tu07nb_di" bpmnElement="SequenceFlow_0tu07nb">
+        <di:waypoint x="820" y="180" />
+        <di:waypoint x="912" y="180" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
