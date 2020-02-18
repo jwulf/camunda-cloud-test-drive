@@ -1,0 +1,17 @@
+name: Drop Database
+
+on: [repository_dispatch]
+
+jobs:
+  drop_tables:
+    if: github.event.action == 'drop_database'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Drop Database
+        uses: jwulf/ghettohub-db@master
+        with:
+          operation: DROPDB
+          verbose: false
+          github_token: ${{secrets.GITHUB_TOKEN}}

@@ -20,3 +20,6 @@ buttons:
   - title: Restock Shop
     action: "restock_shop"
     description: Restock the demo ecommerce store
+  - title: Drop Database
+    action: "drop_db"
+    description: Drop Database
