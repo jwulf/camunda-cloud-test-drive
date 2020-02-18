@@ -111,7 +111,7 @@ This pattern - awaiting a workflow outcome - is useful for short-lived processes
 
 If you have a workflow that makes a number of REST calls, you don't want subsequent tasks to overwrite the results of previous calls.
 
-You can accomplish this by creating variable mappings on your tasks. In the next demo [bpmn/demo-get-time-2.bpmn](bpmn/demo-get-time-2.bpmn), we create a mapping on the "Get JSON time" task to map the `body` variable to a new `time_from_api` variable.
+You can accomplish this by creating [_variable mappings_](https://docs.zeebe.io/reference/variables.html#inputoutput-variable-mappings) on your tasks. In the next demo [bpmn/demo-get-time-2.bpmn](bpmn/demo-get-time-2.bpmn), we create a mapping on the "Get JSON time" task to map the `body` variable to a new `time_from_api` variable.
 
 Here is what that looks like in the [Zeebe Modeler](https://github.com/zeebe-io/zeebe-modeler): 
 
@@ -143,7 +143,7 @@ Note that the status code, which was present in the first demo as the `status` v
 
 ## Make a Decision
 
-In the next demo, we will use a model that makes a decision based on the current time from the JSON API.
+In the next demo, we will use a model that makes a decision based on the current time from the JSON API, using an [_exclusive gateway_](https://docs.zeebe.io/bpmn-workflows/exclusive-gateways/exclusive-gateways.html).
 
 Here is the model, which you can find in [bpmn/demo-get-greeting.bpmn](bpmn/demo-get-greeting.bpmn):
 
