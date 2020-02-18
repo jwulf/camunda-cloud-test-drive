@@ -63,3 +63,37 @@ This process uses a [_sequential multi-instance subprocess_](https://docs.zeebe.
 We will pass in an array of products (which we get from [this GitHub Action](https://github.com/jwulf/camunda-cloud-demo-data-action/blob/master/src/products.ts)), and it will invoke our inventory microservice for each product, updating the stock level.
 
 The inventory microservice communicates back that the operation is complete, and then the next stock item is updated. We could use a parallel multi-instance, except GhettoHub DB can't write to this repo in parallel, because git conflicts.
+
+## Message Correlation
+
+The GitHub workflow that kicks off the action is [.github/workflows/restock-shop.yml](./.github/workflows/restock-shop.yml).
+
+In there, we pass in initial variables to the workflow:
+
+```
+{
+  "repo": "{{ $github.repository }}",
+  "authorization":"Bearer {{GitHubToken}}", 
+  "products":"{{ $steps.product-list.outputs.products}},
+  "stock_level":"2",
+  "event_type":"restock_item",
+  "_id": ${{steps.date.outputs.date}},
+}
+```
+
+| Variable Name | Description |
+| --- | --- |
+| `repo` | This GitHub repo, so Camunda Cloud knows where to send the `repository_dispatch` event to trigger the inventory microservice |
+| `authorization` | The authorization header to allow Camunda Cloud to invoke actions in this repo |
+| `products` | An array of products to put into the stock database |
+| `stock_level` | The stock level to set each product to |
+| `event_type` | A string constant for Camunda Cloud to invoke the correct microservice |
+| `_id` | A unique id for this workflow instance, so the inventory microservice can publish response messages that are correlated with the running workflow instance |
+
+Message correlation with a specific running instance of a workflow relies on two things - a message name, and some aspect of the workflow variables that can be used to identify the workflow instances that should receive the message. See [this article on message correlation](https://zeebe.io/blog/2019/08/zeebe-message-correlation/) for more details.
+
+## Let's Restock the Shop!
+
+* Go to [Actions Panel](https://www.actionspanel.app/).
+
+* Click on the button to _Restock the demo ecommerce store_.
