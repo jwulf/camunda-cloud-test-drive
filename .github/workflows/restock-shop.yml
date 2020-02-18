@@ -15,7 +15,7 @@ jobs:
         id: product-list
         uses: jwulf/camunda-cloud-demo-data-action@master
       - name: Execute Demo Workflow "Restock Shop"
-        uses: jwulf/zeebe-action@debug
+        uses: jwulf/zeebe-action@master
         with:
           client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: createWorkflowInstanceWithResult
