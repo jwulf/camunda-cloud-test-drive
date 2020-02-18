@@ -19,6 +19,6 @@ jobs:
         with:
           client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: createWorkflowInstanceWithResult
-          bpmn_process_id: populate_stock
+          bpmn_process_id: populate-stock
           request_timeout: 120
           variables: '{"_id":"${{steps.date.outputs.date}}","repo":"{{ $github.repository }}","stock_level":"2","authorization":"Bearer {{GitHubToken}}", "products": "{{ $steps.product-list.outputs.products }}" ,"event_type":"restock_item"}'
