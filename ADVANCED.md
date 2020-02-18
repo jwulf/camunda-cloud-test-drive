@@ -52,6 +52,8 @@ Because it is a _non-interrupting_ event, if the underlying infrastructure recov
 
 The implementation we are going to run uses [GhettoHub DB](https://github.com/jwulf/ghettohub-db) - "_The World's Least Web Scale JSON DB_". It's a JSON Database in a GitHub repo through GitHub Actions. Obviously you are not going to use it in production - it is for demo purposes only. It allows  microservices, orchestrated by Camunda Cloud's HTTP Worker, to create database records in this repo using GitHub Actions.
 
+The microservices that service this process are anything but fast. When we reimplement this process using the gRPC workers, you won't get to see it running, it will happen so fast. But this first implementation will happen at a pace where you can see each step.
+
 ## Stocking Inventory
 
 The first thing we will do is populate the stock inventory of our ecommerce store. Here is the BPMN model:
