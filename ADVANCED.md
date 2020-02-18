@@ -50,7 +50,7 @@ Because it is a _non-interrupting_ event, if the underlying infrastructure recov
 
 ## GhettoHub DB
 
-The implementation we are going to run uses [GhettoHub DB](https://github.com/jwulf/ghettohub-db) - "_The World's Least Web Scale JSON DB_". It's JSON Database in a GitHub repo through GitHub Actions. Obviously you are not going to use it in production - it is for demo purposes only. It allows the Camunda HTTP Worker to act as a microservice by activating GitHub workflows that create database records in this repo.
+The implementation we are going to run uses [GhettoHub DB](https://github.com/jwulf/ghettohub-db) - "_The World's Least Web Scale JSON DB_". It's a JSON Database in a GitHub repo through GitHub Actions. Obviously you are not going to use it in production - it is for demo purposes only. It allows  microservices, orchestrated by Camunda Cloud's HTTP Worker, to create database records in this repo using GitHub Actions.
 
 ## Stocking Inventory
 
