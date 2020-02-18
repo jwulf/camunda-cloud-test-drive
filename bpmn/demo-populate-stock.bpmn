@@ -7,7 +7,11 @@
     <bpmn:subProcess id="SubProcess_0itlkj5" name="Restock Product">
       <bpmn:incoming>SequenceFlow_0lix4ka</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0tu07nb</bpmn:outgoing>
-      <bpmn:multiInstanceLoopCharacteristics />
+      <bpmn:multiInstanceLoopCharacteristics>
+        <bpmn:extensionElements>
+          <zeebe:loopCharacteristics inputCollection="products" inputElement="product" />
+        </bpmn:extensionElements>
+      </bpmn:multiInstanceLoopCharacteristics>
       <bpmn:startEvent id="StartEvent_0qjdtfl" name="Restock item">
         <bpmn:outgoing>SequenceFlow_02ilmei</bpmn:outgoing>
       </bpmn:startEvent>
