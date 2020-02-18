@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0q7a5if" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Zeebe Modeler" exporterVersion="0.8.0">
   <bpmn:process id="populate-stock" name="populate-stock" isExecutable="true">
-    <bpmn:startEvent id="StartEvent_1" name="Populate Stock">
+    <bpmn:startEvent id="StartEvent_1" name="Restock shop">
       <bpmn:outgoing>SequenceFlow_0lix4ka</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:subProcess id="SubProcess_0itlkj5">
+    <bpmn:subProcess id="SubProcess_0itlkj5" name="Restock Product">
       <bpmn:incoming>SequenceFlow_0lix4ka</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0tu07nb</bpmn:outgoing>
       <bpmn:multiInstanceLoopCharacteristics isSequential="true">
@@ -60,7 +60,7 @@
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="162" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="160" y="205" width="74" height="14" />
+          <dc:Bounds x="164" y="205" width="67" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ServiceTask_1jng5bi_di" bpmnElement="Task_1u4uohx">
