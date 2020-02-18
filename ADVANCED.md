@@ -50,7 +50,7 @@ Because it is a _non-interrupting_ event, if the underlying infrastructure recov
 
 ## GhettoHub DB
 
-The implementation we are going to run uses [GhettoHub DB](https://github.com/jwulf/ghettohub-db) - "_The World's Least Web Scale JSON DB_". It's a JSON Database in a GitHub repo using GitHub Actions. Obviously you are not going to use it in production - it is for demo purposes only. It allows  microservices, orchestrated by Camunda Cloud's HTTP Worker, to create database records in this repo using GitHub Actions.
+The implementation we are going to run uses [GhettoHub DB](https://github.com/jwulf/ghettohub-db) - "_The World's Least Web Scale JSON DB_". It's a JSON Database in a GitHub repo using GitHub Actions. Obviously you are not going to use it in production - it is for demo purposes only. It allows microservices, orchestrated by Camunda Cloud's HTTP Worker, to create database records in this repo using GitHub Actions.
 
 The microservices that service this process are slooow. When we reimplement this process using the gRPC workers, it will happen so fast that you won't get to see it running. But this first implementation will happen at a pace where you can see each step.
 
@@ -115,3 +115,38 @@ Take a look at the [db/stock](db/stock) directory in your repo. You'll see the s
 Each record is the equivalent of database row in a SQL table:
 
 ![](img/restock-stock-record.png)
+
+## Inventory microservice
+
+The inventory microservice that restocks the shop is in [.github/workflows/restock-item.yml](./.github/workflows/restock-item.yml).
+
+It does two things. First, it upserts the stock record for a product:
+
+```
+- name: Update Stock Level
+uses: jwulf/ghettohub-db@master
+with:
+    operation: UPSERT
+    table: stock
+    record: '{"product":"${{github.event.client_payload.product}}", "stock_level":"${{github.event.client_payload.stock_level}}"}'
+    query: '{"product":"${{github.event.client_payload.product}}"}'
+    verbose: false
+    github_token: ${{secrets.GITHUB_TOKEN}}
+```
+
+Then it publishes a `RESTOCKED` message to Camunda Cloud:
+
+```
+- name: Publish Success Message
+uses: jwulf/zeebe-action@master
+with:
+    client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
+    operation: publishMessage
+    message_name: RESTOCKED
+    correlationKey: ${{github.event.client_payload._id}}
+```
+
+The message name `RESTOCKED` and the value of the `_id` variable are used to correlate the message with the correct running instance of the workflow. When the message arrives, the Zeebe broker passes it to any workflow instances that are listening for the `RESTOCKED` message _and_ that have the value specified in the correlationKey in their `_id` variable.
+
+We pass back the value of the `_id` variable from the workflow, so we know our message will be correlated to the right workflow instance.
+
