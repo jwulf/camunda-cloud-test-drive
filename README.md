@@ -306,7 +306,7 @@ Got a job from Camunda Cloud:
 ===Outcome to Requestor===
 ```
 
-Here you can see the `job` object that the worker receives from Camunda Cloud. The UUID for `worker` is the auto-generated id for this worker. The Zeebe broker knows that the job has been streamed to this worker, and keeps track of how long it has had it. If the worker doesn't complete the job within a [specified period of time](https://www.npmjs.com/package/zeebe-node#create-a-task-worker), the broker will time it out and give the job to another worker.
+Here you can see the `job` object that the worker receives from Camunda Cloud. The UUID in the `worker` field is the auto-generated id for this worker. The Node client generates this automatically to identify this worker instance (you can also provide your own). The Zeebe broker knows that the job has been streamed to this worker, and keeps track of how long it has had it. If the worker doesn't complete the job within a [specified period of time](https://www.npmjs.com/package/zeebe-node#create-a-task-worker), the broker will time it out and give the job to another worker.
 
 Our worker, however, did its job, calculated the correct greeting based on the time in the job variables, and sent back the appropriate greeting.
 
