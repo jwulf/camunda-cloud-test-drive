@@ -61,7 +61,9 @@ When you hit "Add secret", you should see this:
 
 The GitHub Action that deploys the workflows to Camunda Cloud is in [.github/workflows/deploy-workflows.yml](./.github/workflows/deploy-workflows.yml).
 
-Under the hood, the Zeebe GitHub Action uses the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node#deploy-a-workflow) to do this (see the Zeebe Action code that does it [here](https://github.com/jwulf/zeebe-action/blob/master/src/main.ts#L88)). 
+Under the hood, the Zeebe GitHub Action uses the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node#deploy-a-workflow) to do this (see the Zeebe Action code that does it [here](https://github.com/jwulf/zeebe-action/blob/master/src/main.ts#L88)). It uses Zeebe's [`DeployWorkflow`](https://docs.zeebe.io/reference/grpc.html?highlight=deploy,workflow#deployworkflow-rpc) gRPC command.
+
+To see how you can set up a GitHub repository to deploy models to Camunda Cloud on git push to a specific branch using the Zeebe Action, see [here](https://zeebe.io/blog/2020/02/git-push-to-deploy/).
 
 Note that libraries are available to program [Zeebe clients in a number of popular programming languages](https://docs.zeebe.io/clients/index.html).
 
