@@ -77,7 +77,7 @@ If you open the model in the [Zeebe Modeler](https://github.com/zeebe-io/zeebe-m
 
 It has a single task in it. The task is serviced by the [Camunda Cloud HTTP Worker](https://github.com/zeebe-io/zeebe-http-worker). This is a task worker hosted in Camunda Cloud that services tasks of type `CAMUNDA-HTTP` and can make REST calls based on the task configuration, adding the JSON payload of the response to the workflow variables.
 
-To use it, you set the task type to `CAMUNDA-HTTP` and set two headers on the task that have particular semantics for this worker: `url` - what it says; and `method` the HTTP method. The task in this demo workflow has the url set to [https://json-api.joshwulf.com/time](https://json-api.joshwulf.com/time) and the `method` set to "get".
+To use it, you set the task type to `CAMUNDA-HTTP` and set two headers on the task that have particular semantics for this worker: `url` - what it says; and `method` - the HTTP method. The task in this demo workflow has the url set to [https://json-api.joshwulf.com/time](https://json-api.joshwulf.com/time) and the `method` set to "get".
 
 In this workflow, it does a GET request to the [Camunda Cloud Demo JSON API](https://github.com/jwulf/camunda-cloud-demo-json-api) to get the current time as a JSON object.
 
@@ -97,13 +97,15 @@ Let's create an instance of this workflow. We will be running [.github/workflows
 
 The response from the call to the JSON API has been added to the workflow variables.
 
+You can use the provided Camunda HTTP Worker to create integrations between your Camunda Cloud cluster and REST endpoints.
+
 ## Creating a workflow and awaiting the outcome 
 
-We see the output of the workflow here because we used the [`createWorkflowInstanceWithResult`](https://docs.zeebe.io/reference/grpc.html#createworkflowinstance-rpc) call. This call creates a workflow instance, and awaits the result.
+We see the output of the workflow here because we used the [`CreateWorkflowInstanceWithResult`](https://docs.zeebe.io/reference/grpc.html#createworkflowinstance-rpc) call. This call creates a workflow instance, and awaits the result.
 
 Under the hood, the Zeebe GitHub Action uses the Node.js client (see the implementation [here](https://github.com/jwulf/zeebe-action/blob/master/src/main.ts)), and this command is documented for the Node client [here](https://zeebe.joshwulf.com/createwf/createwf/#create-a-workflow-instance-and-await-its-outcome). You can use it with any [Zeebe client library](https://docs.zeebe.io/clients/index.html).
 
-This pattern is useful for short-lived processes, where the creator of the workflow will also act on the outcome - including passing it back to a requestor (for example inside a REST response). See [this blog post](https://zeebe.io/blog/2019/10/0.22-awaitable-outcomes/) for more information.
+This pattern - awaiting a workflow outcome - is useful for short-lived processes, where the creator of the workflow will also act on the outcome - including passing it back to a requestor (for example inside a REST response). See [this blog post](https://zeebe.io/blog/2019/10/0.22-awaitable-outcomes/) for more information.
 
 ## Mapping variables
 
@@ -220,11 +222,11 @@ The second task has a task type of `get-greeting`:
 
 There is no worker listening for the `get-greeting` task type in your cluster, so we need to start one.
 
-You can write Zeebe workers in any of [a number of popular programming languages](https://docs.zeebe.io/clients/index.html). The [Zeebe GitHub Action](https://github.com/marketplace/actions/zeebe-action) that we are using for these demos just happens to be written in JavaScript using the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node).
+You can write Zeebe workers in any of [a number of popular programming languages](https://docs.zeebe.io/clients/index.html). The [Zeebe GitHub Action](https://github.com/marketplace/actions/zeebe-action) that we are using for these demos is written in JavaScript using the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node).
 
 The file [workers/greeting.js](workers/greeting.js) contains a Worker handler function for a Node.js worker. 
 
-The worker job handler in the Node.js client is a simple callback function that takes a `job` and a `complete` function.
+The worker job handler in the Node.js client is a simple callback function that takes a `job` object and a `complete` object that has several callback functions to complete the job signalling success, failure, or a BPMN Error back to the broker.
 
 ```javascript
 module.exports = {
@@ -249,7 +251,7 @@ module.exports = {
 };
 ```
 
-It also contains the code to create and await a workflow instance, print the outcome, and exit:
+The `workers/greeting.js` file also contains the code to create and await a workflow instance, print the outcome, and exit:
 
 ```javascript
 zbc.createWorkflowInstanceWithResult("demo-get-greeting-2", {})
