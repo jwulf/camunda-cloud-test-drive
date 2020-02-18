@@ -263,6 +263,8 @@ zbc.createWorkflowInstanceWithResult("demo-get-greeting-2", {})
 });
 ```
 
+Although in the same file, these two pieces of code do not talk to each other. Their only communication is with Camunda Cloud. One creates a workflow instance in Camunda Cloud and waits for the outcome of the workflow. The other subscribes to tasks of type `get-greeting` and services jobs of that type from Camunda Cloud.
+
 Let's run the demo and see it at work!
 
 The GitHub workflow we will be running is [.github/workflows/demo-get-greeting-2.yml](./.github/workflows/demo-get-greeting-2.yml).
