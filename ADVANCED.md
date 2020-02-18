@@ -2,7 +2,7 @@
 
 In this tutorial, we will look at an ecommerce order flow and correlating messages with instances of workflows.
 
-We will use [GhettoHub DB](https://github.com/jwulf/ghettohub-db) for database persistence for our microservices. They will write to a db folder in this repository, so you will need to configure your Camunda Cloud account so that the Camunda HTTP Worker can trigger GhettoHub DB actions in this repo.
+We will use [GhettoHub DB](https://github.com/jwulf/ghettohub-db) for database persistence for our microservices. They will write to a `db` folder in this repository, so you will need to configure your Camunda Cloud account so that the Camunda HTTP Worker can trigger microservices in this repo.
 
 ## Configure Camunda Cloud to access this repo
 
@@ -58,7 +58,7 @@ The first thing we will do is populate the stock inventory of our ecommerce stor
 
 [![](img/restock-process.png)](img/restock-process.png)
 
-This process uses a [_sequential multi-instance subprocess_](https://docs.zeebe.io/bpmn-workflows/multi-instance/multi-instance.html) to iterate over a collection of products and run the "Restock Product" process for each one. From a programming perspective you can think of it as an `Array.forEach` operation.
+This process uses a [_sequential multi-instance subprocess_](https://docs.zeebe.io/bpmn-workflows/multi-instance/multi-instance.html) to iterate over a collection of products and run the "_Restock Product_" subprocess for each one. From a programming perspective you can think of it as an `Array.forEach` operation.
 
 We will pass in an array of products (which we get from [this GitHub Action](https://github.com/jwulf/camunda-cloud-demo-data-action/blob/master/src/products.ts)), and it will invoke our inventory microservice for each product, updating the stock level.
 
@@ -84,13 +84,13 @@ In there, we pass in initial variables to the workflow:
 | Variable Name | Description |
 | --- | --- |
 | `repo` | This GitHub repo, so Camunda Cloud knows where to send the `repository_dispatch` event to trigger the inventory microservice |
-| `authorization` | The authorization header to allow Camunda Cloud to invoke actions in this repo |
+| `authorization` | The authorization header to allow Camunda Cloud to invoke microservices in this repo |
 | `products` | An array of products to put into the stock database |
 | `stock_level` | The stock level to set each product to |
 | `event_type` | A string constant for Camunda Cloud to invoke the correct microservice |
 | `_id` | A unique id for this workflow instance, so the inventory microservice can publish response messages that are correlated with the running workflow instance |
 
-Message correlation with a specific running instance of a workflow relies on two things - a message name, and some aspect of the workflow variables that can be used to identify the workflow instances that should receive the message. See [this article on message correlation](https://zeebe.io/blog/2019/08/zeebe-message-correlation/) for more details.
+Message correlation with a specific running instance of a workflow relies on two things - a message name, and some aspect of the workflow variables that can be used to identify the workflow instance(s) that should receive the message. See [this article on message correlation](https://zeebe.io/blog/2019/08/zeebe-message-correlation/) for more details.
 
 ## Let's Restock the Shop!
 
