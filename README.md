@@ -63,9 +63,9 @@ The GitHub Action that deploys the workflows to Camunda Cloud is in [.github/wor
 
 Under the hood, the Zeebe GitHub Action uses the [Zeebe Node.js client](https://www.npmjs.com/package/zeebe-node#deploy-a-workflow) to do this (see the Zeebe Action code that does it [here](https://github.com/jwulf/zeebe-action/blob/master/src/main.ts#L88)). It uses Zeebe's [`DeployWorkflow`](https://docs.zeebe.io/reference/grpc.html?highlight=deploy,workflow#deployworkflow-rpc) gRPC command.
 
-To see how you can set up a GitHub repository to deploy models to Camunda Cloud on git push to a specific branch using the Zeebe Action, see [here](https://zeebe.io/blog/2020/02/git-push-to-deploy/).
+To see how you can automate a GitHub repository to deploy models to Camunda Cloud on git push to a specific branch using the Zeebe Action, see [here](https://zeebe.io/blog/2020/02/git-push-to-deploy/).
 
-Note that libraries are available to program [Zeebe clients in a number of popular programming languages](https://docs.zeebe.io/clients/index.html).
+Note that libraries are available to program [Zeebe clients in a number of popular programming languages](https://docs.zeebe.io/clients/index.html). You can also use the [Zeebe CLI `zbctl`](https://www.npmjs.com/package/zbctl) to deploy models to Camunda Cloud.
 
 ## Run the Get Time demo
 
@@ -226,7 +226,7 @@ You can write Zeebe workers in any of [a number of popular programming languages
 
 The file [workers/greeting.js](workers/greeting.js) contains a Worker handler function for a Node.js worker. 
 
-The worker job handler in the Node.js client is a simple callback function that takes a `job` object and a `complete` object that has several callback functions to complete the job signalling success, failure, or a BPMN Error back to the broker.
+The worker job handler in the Node.js client is a simple callback function that takes a `job` object and a `complete` object that has several callback functions to complete the job signalling [success, failure, or a BPMN Error](https://www.npmjs.com/package/zeebe-node#completing-tasks-with-success-failure-or-error) back to the broker.
 
 ```javascript
 module.exports = {

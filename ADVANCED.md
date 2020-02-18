@@ -146,7 +146,11 @@ with:
     correlationKey: ${{github.event.client_payload._id}}
 ```
 
-The message name `RESTOCKED` and the value of the `_id` variable are used to correlate the message with the correct running instance of the workflow. When the message arrives, the Zeebe broker passes it to any workflow instances that are listening for the `RESTOCKED` message _and_ that have the value specified in the `correlationKey` in their `_id` variable.
+This uses the Node.js client's [publishMessage](https://www.npmjs.com/package/zeebe-node#publish-a-message) method to send a [`PublishMessage`](https://docs.zeebe.io/reference/grpc.html?highlight=publishMessage#publishmessage-rpc) gRPC command to the broker. The message name "RESTOCKED" and the value of the `_id` variable are used to correlate the message with the correct running instance of the workflow. When the message arrives, the Zeebe broker passes it to any workflow instances that are listening for the `RESTOCKED` message _and_ that have the value specified in the `correlationKey` in their `_id` variable.
 
 We pass back the value of the `_id` variable from the workflow, so we know our message will be correlated to the right workflow instance.
+
+## Fulfilling an order
+
+OK, so now that we have stock in our shop, let's make some sales!
 
