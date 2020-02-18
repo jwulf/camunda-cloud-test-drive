@@ -116,11 +116,15 @@
       <bpmn:sequenceFlow id="SequenceFlow_1eulgcd" sourceRef="IntermediateThrowEvent_064ngdh" targetRef="Task_0hcr5am" />
       <bpmn:sequenceFlow id="SequenceFlow_1f1en9c" sourceRef="Task_0hcr5am" targetRef="IntermediateThrowEvent_0irgvh3" />
       <bpmn:sequenceFlow id="SequenceFlow_1b87i5t" sourceRef="IntermediateThrowEvent_0irgvh3" targetRef="ExclusiveGateway_10myo1b" />
-      <bpmn:sequenceFlow id="SequenceFlow_0kqkuw9" name="stock_level &#60; 1" sourceRef="ExclusiveGateway_10myo1b" targetRef="EndEvent_14zv4eh" />
+      <bpmn:sequenceFlow id="SequenceFlow_0kqkuw9" name="stock_level &#60; 1" sourceRef="ExclusiveGateway_10myo1b" targetRef="EndEvent_14zv4eh">
+        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">stock_level &lt; 1</bpmn:conditionExpression>
+      </bpmn:sequenceFlow>
       <bpmn:sequenceFlow id="SequenceFlow_028uswq" sourceRef="ExclusiveGateway_10myo1b" targetRef="Task_0pqjhus" />
       <bpmn:sequenceFlow id="SequenceFlow_1lki4xr" sourceRef="Task_0pqjhus" targetRef="IntermediateThrowEvent_0nwwwv6" />
       <bpmn:sequenceFlow id="SequenceFlow_1w3oces" sourceRef="IntermediateThrowEvent_0nwwwv6" targetRef="Task_0sh47zs" />
-      <bpmn:sequenceFlow id="SequenceFlow_09mpm0r" name="charged==true" sourceRef="ExclusiveGateway_1m24c2e" targetRef="Task_0fuzct2" />
+      <bpmn:sequenceFlow id="SequenceFlow_09mpm0r" name="customer_charged==true" sourceRef="ExclusiveGateway_1m24c2e" targetRef="Task_0fuzct2">
+        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">customer_charged==true</bpmn:conditionExpression>
+      </bpmn:sequenceFlow>
       <bpmn:sequenceFlow id="SequenceFlow_0u0qp17" sourceRef="Task_0fuzct2" targetRef="IntermediateThrowEvent_0v4t9p7" />
       <bpmn:sequenceFlow id="SequenceFlow_0m19kqy" sourceRef="IntermediateThrowEvent_0v4t9p7" targetRef="EndEvent_1r9llff" />
       <bpmn:sequenceFlow id="SequenceFlow_1ymsbv1" sourceRef="Task_0sh47zs" targetRef="IntermediateThrowEvent_0wjgail" />
@@ -314,7 +318,7 @@
         <di:waypoint x="1565" y="300" />
         <di:waypoint x="1660" y="300" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1577" y="282" width="72" height="14" />
+          <dc:Bounds x="1571" y="266" width="85" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0hdz1ra_di" bpmnElement="SequenceFlow_0hdz1ra">
