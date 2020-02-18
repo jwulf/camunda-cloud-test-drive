@@ -8,7 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
       - name: Get unique id for message correlation
         id: date
         run: echo "::set-output name=date::$(date)"
