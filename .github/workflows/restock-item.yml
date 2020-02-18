@@ -14,8 +14,9 @@ jobs:
         with:
           operation: UPSERT
           table: stock
-          record: '{"product":"{{$github.event.client_payload.product}}", "stock_level":"{{$github.event.client_payload.stock_level}}"'
-          query: '{"product":"{{$github.event.client_payload.product}}"}'
+          record: '{"product":"${{github.event.client_payload.product}}", "stock_level":"${{github.event.client_payload.stock_level}}"'
+          query: '{"product":"${{github.event.client_payload.product}}"}'
+          verbose: true
       - name: Publish Success Message
         uses: jwulf/zeebe-action@master
         with:
