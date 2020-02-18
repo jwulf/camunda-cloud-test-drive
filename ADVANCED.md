@@ -99,3 +99,19 @@ Message correlation with a specific running instance of a workflow relies on two
 * Go to [Actions Panel](https://www.actionspanel.app/).
 
 * Click on the button to _Restock the demo ecommerce store_.
+
+You will see the "Restock Shop" action run, then several instances of "Restock Item".
+
+* Go into Operate and search for running and completed instances. You'll see an instance of `populate-stock` in there.
+
+When it is finished, you'll see the multi-instance:
+
+![](img/restock-multi-operate.png)
+
+Take a look at the [db/stock](db/stock) directory in your repo. You'll see the stock records created by the inventory microservice:
+
+![](img/restock-stock-table.png)
+
+Each record is the equivalent of database row in a SQL table:
+
+![](img/restock-stock-record.png)
