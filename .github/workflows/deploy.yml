@@ -14,3 +14,4 @@ jobs:
           clientConfig: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: deployWorkflow
           bpmnDirectory: bpmn
+          verbose: true
