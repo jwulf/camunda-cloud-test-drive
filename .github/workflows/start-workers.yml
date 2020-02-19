@@ -12,7 +12,7 @@ jobs:
       - name: Start Workers
         uses: jwulf/zeebe-action@master
         with:
-          client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
+          clientConfig: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: startWorkers
-          worker_handler_file: workers/workers.js
-          worker_lifetime_mins: 2
+          workerHandlerFile: workers/workers.js
+          workerLifetimeMins: 2

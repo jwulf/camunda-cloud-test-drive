@@ -17,8 +17,8 @@ jobs:
       - name: Execute Demo Workflow "Restock Shop"
         uses: jwulf/zeebe-action@master
         with:
-          client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
+          clientConfig: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: createWorkflowInstanceWithResult
-          bpmn_process_id: populate-stock
-          request_timeout: 300000 # 300 seconds
+          bpmnProcessId: populate-stock
+          requestTimeoutSeconds: 300
           variables: '{"_id":"${{steps.date.outputs.date}}","repo":"${{github.repository}}","stock_level":"2","authorization":"Bearer {{GitHubToken}}", "products": ${{steps.product-list.outputs.products}} ,"event_type":"restock_item"}'

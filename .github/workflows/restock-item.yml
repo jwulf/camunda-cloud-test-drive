@@ -21,7 +21,7 @@ jobs:
       - name: Publish Success Message
         uses: jwulf/zeebe-action@master
         with:
-          client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
+          clientConfig: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: publishMessage
-          message_name: RESTOCKED
+          messageName: RESTOCKED
           correlationKey: ${{github.event.client_payload._id}}

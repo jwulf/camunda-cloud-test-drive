@@ -12,11 +12,12 @@ jobs:
       - name: Deploy Demo Workflow "Get Time" No. 2
         uses: jwulf/zeebe-action@master
         with:
-          client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
+          clientConfig: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: deployWorkflow
-          bpmn_filename: bpmn/demo-get-time-2.bpmn
+          bpmnFilename: bpmn/demo-get-time-2.bpmn
       - name: Execute Demo Workflow "Get Time" No. 2
         uses: jwulf/zeebe-action@master
         with:
           operation: createWorkflowInstanceWithResult
-          bpmn_process_id: demo-get-time-2
+          bpmnProcessId: demo-get-time-2
+          requestTimeoutSeconds: 15

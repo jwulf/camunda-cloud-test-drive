@@ -12,12 +12,13 @@ jobs:
       - name: Deploy Demo Workflow "Get Greeting"
         uses: jwulf/zeebe-action@master
         with:
-          client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
+          clientConfig: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: deployWorkflow
-          bpmn_filename: bpmn/demo-get-greeting.bpmn
+          bpmnFilename: bpmn/demo-get-greeting.bpmn
       - name: Execute Demo Workflow "Get Greeting"
         uses: jwulf/zeebe-action@master
         with:
           operation: createWorkflowInstanceWithResult
-          bpmn_process_id: demo-get-greeting
+          bpmnProcessId: demo-get-greeting
           variables: '{"greeting":{"morning":"Good morning!","afternoon":"Good afternoon!","night":"Good night!"}}'
+          requestTimeoutSeconds: 15

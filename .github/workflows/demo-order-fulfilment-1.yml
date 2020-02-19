@@ -12,9 +12,9 @@ jobs:
       - name: Deploy Demo Workflow "Order Fulfilment 1"
         uses: jwulf/zeebe-action@master
         with:
-          client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
+          clientConfig: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: deployWorkflow
-          bpmn_filename: bpmn/demo-order-fulfilment-1.bpmn
+          bpmnFilename: bpmn/demo-order-fulfilment-1.bpmn
       - name: Get Database dictionary for Workflow
         id: database
         uses: jwulf/ghettohub-db@master
@@ -28,5 +28,6 @@ jobs:
         uses: jwulf/zeebe-action@master
         with:
           operation: createWorkflowInstanceWithResult
-          bpmn_process_id: order-fulfilment-1
+          bpmnProcessId: order-fulfilment-1
           variables: '{"_id":${{steps.date.outputs.date}},"repo":"{{ $github.repository }}","database":"{{ $steps.database.outputs.result }}","authorization":"Bearer {{GitHubToken}}"}'
+          requestTimeoutSeconds: 15

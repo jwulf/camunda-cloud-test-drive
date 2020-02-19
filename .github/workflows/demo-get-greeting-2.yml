@@ -12,12 +12,12 @@ jobs:
       - name: Deploy Demo Workflow "Get Greeting 2"
         uses: jwulf/zeebe-action@master
         with:
-          client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
+          clientConfig: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: deployWorkflow
-          bpmn_filename: bpmn/demo-get-greeting-2.bpmn
+          bpmnFilename: bpmn/demo-get-greeting-2.bpmn
       - name: Execute Demo Workflow "Get Greeting 2"
         uses: jwulf/zeebe-action@master
         with:
           operation: startWorkers
-          worker_handler_file: workers/greeting.js
-          worker_lifetime_mins: 2
+          workerHandlerFile: workers/greeting.js
+          workerLifetimeMins: 2

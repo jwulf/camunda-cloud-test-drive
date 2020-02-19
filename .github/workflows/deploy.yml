@@ -11,6 +11,6 @@ jobs:
       - name: Deploy Demo Workflows
         uses: jwulf/zeebe-action@master
         with:
-          client_config: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
+          clientConfig: ${{ secrets.ZEEBE_CLIENT_CONFIG }}
           operation: deployWorkflow
-          bpmn_directory: bpmn
+          bpmnDirectory: bpmn
