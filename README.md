@@ -21,7 +21,7 @@ The current speed run record for completing it is 14 minutes, but we reckon 30 m
 
 ![](img/client-config.png)
 
-* Create a new secret in your forked repository's Settings > Secrets ([instructions](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets)). Call it `ZEEBE_CLIENT_CONFIG`, and paste in the client config:
+* Create a new secret in your forked repository's Settings > Secrets ([instructions](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets)). Name it `ZEEBE_CLIENT_CONFIG`, and paste in the client config:
 
 ![](img/secrets.png)
 
