@@ -1,13 +1,19 @@
-# Zero-installation Getting Started with Camunda Cloud 
+# Test Drive Camunda Cloud from GitHub
 
 [![Actions Panel](https://img.shields.io/badge/actionspanel-enabled-brightgreen)](https://www.actionspanel.app/app/jwulf/camunda-cloud-starter)
 
-Getting Started with Camunda Cloud in 30 minutes with no code or installation of software, just a fork of this repo - using the [Zeebe GitHub Action](https://github.com/marketplace/actions/zeebe-action).
+Test drive [Camunda Cloud](https://camunda.io) in 30 minutes using just a fork of this repo.
+
+This is an executable demo of Camunda Cloud that runs on GitHub using the [Zeebe GitHub Action](https://github.com/marketplace/actions/zeebe-action), one of the [many client libraries](https://docs.zeebe.io/clients/index.html) available to develop applications that communicate with Camunda Cloud.
+
+In this demo you'll deploy workflows, start workflow instances, and see their results. You'll be introduced to designing systems that use BPMN for design and operational clarity, and even run an entire ecommerce order fulfilment process - all from the comfort of your browser.
+
+Along the way there will be links into the documentation and pointers to resources that you can use to start developing with [Zeebe](https://zeebe.io) and Camunda Cloud. You can always come back and dive deeper into the different aspects as you need. The purpose of this demo is to give you an overview - a bigger picture that you can slot the details into.
 
 ## Setup
 
-* Fork this repo to your own account.
 * Get a [Camunda Cloud](https://camunda.io) Account.
+* Fork this repo to your own account.
 * Create a new client in the Camunda Cloud console.
 * Click the button to copy the entire client configuration
 
