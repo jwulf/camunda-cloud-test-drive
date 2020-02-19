@@ -10,6 +10,8 @@ In this demo you'll deploy workflows, start workflow instances, and see their re
 
 Along the way there will be links into the documentation and pointers to resources that you can use to start developing with [Zeebe](https://zeebe.io) and Camunda Cloud. You can always come back and dive deeper into the different aspects as you need. The purpose of this demo is to give you an overview - a bigger picture that you can slot the details into.
 
+The current speed run record for completing it is 14 minutes, but we reckon 30 minutes is a good amount of time to set aside.
+
 ## Setup
 
 * Get a [Camunda Cloud](https://camunda.io) Account.
